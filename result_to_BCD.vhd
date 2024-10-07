@@ -5,7 +5,7 @@ use ieee.std_logic_unsigned.all;
 
 entity result_to_BCD is
 		Port ( clk_i  : in  std_logic;	-- system clock
-				 data 	: in  STD_LOGIC_VECTOR (9 downto 0);
+				 data 	: in  STD_LOGIC_VECTOR (19 downto 0);
 				 BCD_digit_1 : out STD_LOGIC_VECTOR (3 downto 0);
 				 BCD_digit_2 : out STD_LOGIC_VECTOR (3 downto 0);
 				 BCD_digit_3 : out STD_LOGIC_VECTOR (3 downto 0);
@@ -34,6 +34,9 @@ signal int_data_3 : integer := 0;
 						int_data_1 <= conv_integer(unsigned(data)) mod 10;
 						int_data_2 <= (conv_integer(unsigned(data)) / 10) mod 10;
 						int_data_3 <= (conv_integer(unsigned(data)) / 100) mod 10;
+						int_data_4 <= (conv_integer(unsigned(data)) / 1000) mod 10;
+						int_data_5 <= (conv_integer(unsigned(data)) / 10000) mod 10;
+						int_data_6 <= (conv_integer(unsigned(data)) / 100000) mod 10;
 					end if;
 
 					
@@ -41,6 +44,9 @@ signal int_data_3 : integer := 0;
 				BCD_digit_1 <= conv_std_logic_vector(int_data_1, 4);
 				BCD_digit_2 <= conv_std_logic_vector(int_data_2, 4);
 				BCD_digit_3 <= conv_std_logic_vector(int_data_3, 4);
+				BCD_digit_4 <= conv_std_logic_vector(int_data_4, 4);
+				BCD_digit_5 <= conv_std_logic_vector(int_data_5, 4);
+				BCD_digit_6 <= conv_std_logic_vector(int_data_6, 4);
 				
 
 

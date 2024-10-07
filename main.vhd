@@ -17,6 +17,17 @@ signal selector : STD_LOGIC_VECTOR(1 downto 0);
 signal state : state_type := S0
 signal start_in : std_logic:= '0';
 
+component result_to_BCD
+		port(	 clk_i  : in  std_logic;	
+				 data 	: in  STD_LOGIC_VECTOR (9 downto 0);
+				 BCD_digit_1 : out STD_LOGIC_VECTOR (3 downto 0);
+				 BCD_digit_2 : out STD_LOGIC_VECTOR (3 downto 0);
+				 BCD_digit_3 : out STD_LOGIC_VECTOR (3 downto 0);
+				 BCD_digit_4 : out STD_LOGIC_VECTOR (3 downto 0);
+				 BCD_digit_5 : out STD_LOGIC_VECTOR (3 downto 0);
+				 BCD_digit_6 : out STD_LOGIC_VECTOR (3 downto 0));
+	end component;
+
 begin
 	start_in <= start;
 	process(reset,start,clock,input)
@@ -25,51 +36,52 @@ begin
 			case state is
 				when S0 =>
 					if start_in = '0' then
-						state <= S1
+						state <= S1;
 					else
-						state <= S0
+						state <= S0;
 					end if;
 						
 				when S1 =>
 					if start_in = '0' then
-						state <= S2
+						state <= S2;
 					else
-						state <= S1
+						state <= S1;
+						cur_input <= input;
 					end if;
 						
 				when S2 =>
 					if start_in = '0' then
-						state <= S3
+						state <= S3;
 					else
-						state <= S2
+						state <= S2;
 					end if;
 						
 				when S3 =>
 					if start_in = '0' then
-						state <= S4
+						state <= S4;
 					else
-						state <= S3
+						state <= S3;
 					end if;
 						
 				when S4 =>
 					if start_in = '0' then
-						state <= S5
+						state <= S5;
 					else
-						state <= S4
+						state <= S4;
 					end if;
 						
 				when S5 =>
 					if start_in = '0' then
-						state <= S6
+						state <= S6;
 					else
-						state <= S5
+						state <= S5;
 					end if;
 						
 				when S6 =>
 					if start_in = '0' then
-						state <= S7
+						state <= S7;
 					else
-						state <= S6
+						state <= S6;
 					end if;
 			
 			end case;

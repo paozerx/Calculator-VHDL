@@ -3,15 +3,15 @@ use ieee.std_logic_1164.all;
 
 entity full_adder is 
 	port(
-		a, b, c_in, m : in std_logic;
+		a, b, c_in : in std_logic;
 		c_out, sum : out std_logic
 	);
 end full_adder;
 
 architecture data_flow of full_adder is
 begin  
-	c_out <= ((a xor (b xor m)) and c_in) or (a and (b xor m));
-	sum <= (a xor (b xor m)) xor c_in;
+	c_out <= ((a xor b) and c_in) or (a and b);
+	sum <= (a xor b) xor c_in;
 end data_flow;
 
 
@@ -22,7 +22,7 @@ use ieee.std_logic_1164.all;
 entity add_gen is
 	generic(N : integer := 3); 
 	port(
-		c_in, m : in std_logic;  
+		c_in : in std_logic;  
 		a, b : in std_logic_vector(N-1 downto 0); 
 		V : out std_logic; 
 		c_out : buffer std_logic;
@@ -33,7 +33,7 @@ end add_gen;
 architecture data_flow of add_gen is
 	component full_adder
 		port(
-			a, b, c_in, m : in std_logic;
+			a, b, c_in: in std_logic;
 			c_out, sum : out std_logic
 		);
 	end component;
@@ -46,17 +46,17 @@ begin
 	adder: for i in 0 to N-1 generate
 		L0: if i = 0 generate
 			FA_i: entity WORK.full_adder(data_flow)
-				port map (c_in => not m, a => a(i), b => b(i), m => not m, c_out => x(i+1),sum => sum(i));
+				port map (c_in => '0', a => a(i), b => b(i), c_out => x(i+1),sum => sum(i));
 		end generate;
 		
 		L1: if i > 0 and i < (N-1) generate
 			FA_i: entity WORK.full_adder(data_flow)
-				port map (c_in => x(i), a => a(i), b => b(i), m => not m, c_out => x(i+1), sum => sum(i));
+				port map (c_in => x(i), a => a(i), b => b(i), c_out => x(i+1), sum => sum(i));
 		end generate;
 		
 		L2: if i = (N-1) generate
 			FA_i: entity WORK.full_adder(data_flow)
-				port map (c_in => x(i), a => a(i), b => b(i), m => not m, c_out => c_out, sum => sum(i));
+				port map (c_in => x(i), a => a(i), b => b(i),c_out => c_out, sum => sum(i));
 		end generate;
 	end generate;
 	

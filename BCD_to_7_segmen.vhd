@@ -1,5 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity BCD_to_7_segmen is
 
@@ -12,7 +14,7 @@ end BCD_to_7_segmen;
 
 architecture data_process of BCD_to_7_segmen is
 begin
-  process(clk_i)  -- sensitivity list
+  process(clk_i)  
 	 begin
 		if clk_i'event and clk_i='1' THEN   
 				case BCD_i is             --gfedcba
@@ -26,6 +28,9 @@ begin
 					when "0111" => seven_seg <= "1111000"; --7-segment display number 7
 					when "1000" => seven_seg <= "0000000"; --7-segment display number 8
 					when "1001" => seven_seg <= "0010000"; --7-segment display number 9
+					when "1010" => seven_seg <= "0011100"; --7-segment display ooo up
+					when "1011" => seven_seg <= "0100011"; --7-segment display ooo down
+					when "1100" => seven_seg <= "1111111"; --7-segment display empty
 					when others => seven_seg <= "0001110"; --7-segment display F
 				
 				end case;

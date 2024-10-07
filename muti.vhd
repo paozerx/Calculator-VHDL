@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity Multiplication is
-    generic ( N : integer := 5 );
+    generic ( N : integer := 10 );
     port( CLK, RST_N, START : in  std_logic;
           A, B : in  std_logic_vector( N-1 downto 0 );
           R    : out std_logic_vector( 2*N-1 downto 0 );

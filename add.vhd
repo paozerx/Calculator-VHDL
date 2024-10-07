@@ -20,13 +20,13 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity add_gen is
-	generic(N : integer := 3); 
+	generic(N : integer := 10); 
 	port(
 		c_in : in std_logic;  
 		a, b : in std_logic_vector(N-1 downto 0); 
 		V : out std_logic; 
 		c_out : buffer std_logic;
-		sum : out std_logic_vector(N-1 downto 0) 
+		sum : out std_logic_vector(2*N-1 downto 0) 
 	);
 end add_gen;
 

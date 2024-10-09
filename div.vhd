@@ -5,26 +5,24 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity division is
     generic ( N : integer := 10);
-    port( CLK, RST_N, START : in std_logic;
+    port( CLK, RST_N : in std_logic;
           A, B : in std_logic_vector( N-1 downto 0 ):= (others => '0');
           R : out std_logic_vector( 2*N-1 downto 0 ):= (others => '0'); 
-			 Q : out std_logic_vector( N-1 downto 0 ):= (others => '0');
-			 sign_bit : out std_logic_vector(6 downto 0) ;
-          DONE : out std_logic := '0' );
+			 Q : out std_logic_vector( 2*N-1 downto 0 ):= (others => '0');
+			 sign_bit : out std_logic );
 end division ;
 
 architecture Behave of division is
     type state_type is (S0,S1);
-    signal Data_A : std_logic_vector( 2*N-1 downto 0 ):= (others => '0');-- divisor
-    signal Data_B : std_logic_vector( 2*N-1 downto 0 ):= (others => '0'); -- reminder
+    signal Data_A : std_logic_vector( 2*N-1 downto 0 ):= (others => '0');
+    signal Data_B : std_logic_vector( 2*N-1 downto 0 ):= (others => '0'); 
     signal quotient : std_logic_vector( N-1 downto 0 ):= (others => '0');
     signal bit_counter : integer := 0;
     signal state : state_type := S0;
-    signal P_done : std_logic := '0';
     signal S_Start : std_logic := '0';
 	 signal pro_a : std_logic_vector(N-1 downto 0);
 	 signal pro_b : std_logic_vector(N-1 downto 0);
-	 signal sign_bit_data : std_logic_vector(6 downto 0);
+	 signal sign_bit_data : std_logic;
 	 signal diff_of_r_d : std_logic_vector(2*N-1 downto 0);
 begin
 	
@@ -46,18 +44,18 @@ begin
 		end process ;
 				
 			
-    S_Start <= START;
+    S_Start <= '0';
     
-    process (RST_N, CLK, START,A,B)
+    process (RST_N, CLK,A,B)
     begin
 			if A(9) ='1' and B(9) ='1' then 
-				sign_bit_data <= "1111111";
+				sign_bit_data <= '0';
 			elsif A(9) ='0' and B(9) ='0' then 
-				sign_bit_data <= "1111111";
+				sign_bit_data <= '0';
 			elsif A(9) ='1' and B(9) ='0' then 
-				sign_bit_data <= "0111111";
+				sign_bit_data <= '1';
 			elsif A(9) ='0' and B(9) ='1' then 
-				sign_bit_data <= "0111111";
+				sign_bit_data <= '1';
 			end if;
 			
 		  
@@ -67,10 +65,10 @@ begin
             Data_B <= (others => '0');
             R <= (others => '0');
 				Q <= (others => '0');
-				sign_bit <= "1111111";
+				sign_bit <= '0';
 				
 				
-        sign_bit_data <= "1111111";
+        sign_bit_data <= '0';
         elsif rising_edge(CLK) then
             case state is
                 when S0 =>
@@ -80,7 +78,6 @@ begin
                         state <= S1;            -- goto S1 when START bit Active
                     else
                         state <= S0; -- Non Active START bit goto s1
-                        DONE <= '0';
                     end if;
                 
                 when S1 => -- Multipli process
@@ -91,7 +88,7 @@ begin
                             Data_A <= std_logic_vector(shift_right(unsigned(Data_A), 1)); --shift_left data_A 1 bit
 									 quotient <= std_logic_vector(shift_left(unsigned(quotient),1)); -- shift_right quotient 1 bit
                             R <= Data_B;
-									 Q <= quotient ; 
+									 Q(N-1 downto 0) <= quotient ; 
                             bit_counter <= bit_counter + 1;
                         else
                             Data_A <= std_logic_vector(shift_right(unsigned(Data_A), 1)); --shift_left data_A 1 bit
@@ -99,7 +96,7 @@ begin
 									 quotient(0) <= '1';
 									 Data_B <= diff_of_r_d ; 
 									 R <= Data_B;
-									 Q <= quotient ; 
+									 Q(N-1 downto 0) <= quotient ; 
                             bit_counter <= bit_counter + 1;
                         end if;
                     else
@@ -108,7 +105,6 @@ begin
                         Data_A <= (others => '0');
                         Data_B <= (others => '0');
                         state <= S0;
-                        DONE <= '1';
                     end if;
 							sign_bit <= sign_bit_data;
                 when others =>

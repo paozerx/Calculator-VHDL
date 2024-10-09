@@ -4,8 +4,8 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity main is
-    Port ( input : in STD_LOGIC_VECTOR(9 downto 0);
-			  input_to : out STD_LOGIC_VECTOR(19 downto 0);
+    Port ( input : in STD_LOGIC_VECTOR(9 downto 0) ;
+			  input_to : out STD_LOGIC_VECTOR(19 downto 0) := (others => '0');
 			  start,reset,clock : in std_logic;
 			  enable : out std_logic;
 			  enable_binary : out std_logic;
@@ -20,14 +20,20 @@ signal cur_input : STD_LOGIC_VECTOR(19 downto 0);
 signal selec : STD_LOGIC_VECTOR(1 downto 0);
 signal state : state_type := S0;
 signal start_in : std_logic:= '0';
+signal input_ex : STD_LOGIC_VECTOR(9 downto 0);
+signal d_start : std_logic;
 
 
 begin
-	start_in <= start;
+	d_start <= start;
 	
 	process(reset,start,clock,input)
 	
 		begin
+		
+		if (input(9) = '1') then
+			input_ex <= not(input) + 1;
+		end if;
 		
 		if reset = '0' then
 			state <= S0;
@@ -41,9 +47,10 @@ begin
 		elsif rising_edge(clock) then
 			case state is
 				when S0 =>
-					if start_in = '0' then
+					if start = '0' and d_start = '1' then
 						state <= S1;
-					else
+						
+					elsif start = '1' then
 						state <= S0;
 						input_to <= "10000000000000000000";
 						enable_binary <= '0';
@@ -52,20 +59,20 @@ begin
 					end if;
 						
 				when S1 =>
-					if start_in = '0' then
-						a <= input;
+					if start = '0' and d_start = '1' then
+						a <= input_ex;
 						state <= S2;
-					else
+					elsif start = '1' then
 						state <= S1;
-						input_to (9 downto 0) <= input;
-						enable_binary <= '1';
+						input_to <= "00000000000000000000";
+						enable_binary <= '0';
 						enable <= '0';
 					end if;
 						
 				when S2 =>
-					if start_in = '0' then
+					if start = '0' and d_start = '1' then
 						state <= S3;
-					else
+					elsif start = '1' then
 						state <= S2;
 						input_to <= "00000000000000000000";
 						enable_binary <= '0';
@@ -73,20 +80,20 @@ begin
 					end if;
 						
 				when S3 =>
-					if start_in = '0' then
-						b <= input;
+					if start = '0' and d_start = '1' then
+						b <= input_ex;
 						state <= S4;
-					else
+					elsif start = '1' then
 						state <= S3;
-						input_to (9 downto 0) <= input;
+						input_to (9 downto 0) <= input_ex;
 						enable_binary <= '1';
 						enable <= '0';
 					end if;
 						
 				when S4 =>
-					if start_in = '0' then
+					if start = '0' and d_start = '1' then
 						state <= S5;
-					else
+					elsif start = '1' then
 						state <= S4;
 						input_to <= "00000000000000000000";
 						enable_binary <= '0';
@@ -94,11 +101,11 @@ begin
 					end if;
 						
 				when S5 =>
-					if start_in = '0' then
+					if start = '0' and d_start = '1' then
 						selector <= input(1 downto 0);
 						state <= S6;
 						
-					else
+					elsif start = '1' then
 						state <= S5;
 						input_to <= "00000000000000000000";
 						enable_binary <= '0';

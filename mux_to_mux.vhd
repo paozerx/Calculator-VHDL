@@ -17,10 +17,14 @@ begin
     process(input_1, input_2, input_3,input_4,  enable)
     begin
         case enable is
-            when "00" => output <= input_1;
-            when "01" => output <= input_2;
-            when "10" => output <= input_3;
-            when "11" => output <= input_4;
+            when "11" => 
+					output <= input_1;
+            when "10" => 
+					output <= input_2;
+            when "01" => 
+					output <= input_3;
+            when "00" => 
+					output <= input_4;
             when others => output <= (others => '0'); 
         end case;
     end process;

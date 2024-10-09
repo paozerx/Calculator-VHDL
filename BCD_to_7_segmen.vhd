@@ -28,10 +28,12 @@ begin
 					when "0111" => seven_seg <= "1111000"; --7-segment display number 7
 					when "1000" => seven_seg <= "0000000"; --7-segment display number 8
 					when "1001" => seven_seg <= "0010000"; --7-segment display number 9
-					when "1010" => seven_seg <= "0011100"; --7-segment display ooo up
-					when "1011" => seven_seg <= "0100011"; --7-segment display ooo down
-					when "1100" => seven_seg <= "1111111"; --7-segment display empty
-					when others => seven_seg <= "0001110"; --7-segment display F
+					when "1010" => seven_seg <= "0011100"; --7-segment display ooo up 10
+					when "1011" => seven_seg <= "0100011"; --7-segment display ooo down 11
+					when "1100" => seven_seg <= "1111111"; --7-segment display empty 12
+					when "1101" => seven_seg <= "0110110"; --7-segment display = 3 13
+					when "1110" => seven_seg <= "0111111"; --7-segment display -  14
+					when others => seven_seg <= "0001110"; --7-segment display F 15
 				
 				end case;
 		end if;

@@ -6,7 +6,6 @@ use ieee.std_logic_unsigned.all;
 entity top_level is
 		Port ( clock  : in  std_logic;	
              reset  : in  std_logic; 	
-				 sign_o : out std_logic;
 				 done : out std_logic := '1'; 
 				 input  : in std_logic_vector(9 downto 0);
 				 START_in   : in std_logic;
@@ -37,10 +36,13 @@ architecture converter of top_level is
  signal result_add : STD_LOGIC_VECTOR (19 downto 0);
  signal result_sub : STD_LOGIC_VECTOR (19 downto 0);
  signal result_div : STD_LOGIC_VECTOR (19 downto 0);
- signal result_div_Q : STD_LOGIC_VECTOR (9 downto 0);
- signal sign_out : STD_LOGIC_VECTOR (6 downto 0);
+ signal result_div_R : STD_LOGIC_VECTOR (19 downto 0);
+ signal sign_out_div : STD_LOGIC;
+ signal sign_out_muti : STD_LOGIC;
+ signal sign_out : STD_LOGIC;
  signal done_o : std_logic;
-
+ signal overflow_add : std_logic;
+ signal overflow_sub : std_logic;
 
  
 	begin
@@ -62,6 +64,7 @@ architecture converter of top_level is
 										input_1 => input_tran,
 										input_2 => mux_to_mux,
 										enable => enable_mux,
+										done => done,
 										output => Transfer_data_binary);
 										
 		mux_4: 			entity work.mux_to_mux(Behavioral)
@@ -72,12 +75,22 @@ architecture converter of top_level is
 										input_4 => result_div,
 										enable => selec,
 										output => mux_to_mux);
+										
+		mux_sign: 			entity work.mux_sign(Behavioral)
+									port map(
+										add => result_add,
+										sub => result_sub,
+										sign_muti => sign_out_muti,
+										sign_div => sign_out_div,
+										enable => selec,
+										output => sign_out);
 		
 		add: 			entity work.add_gen(data_flow)
 									port map(
 										a => A,
 									   b => B,
 										c_in => '0',
+										V => overflow_add,
 										sum => result_add);
 										
 		sub: 			entity work.sub_gen(data_flow)
@@ -85,36 +98,41 @@ architecture converter of top_level is
 										a => A,
 									   b => B,
 										c_in => '1',
+										V => overflow_sub,
 										sum => result_sub);
 										
 		multi: 			entity work.Multiplication(Behave)
 									port map(
 										A => A,
 									   B => B,
-										START => START_in,
+										--START => START_in,
 										RST_N => reset,
 										CLK => clock,
-										sign => sign_o,
-										DONE => done,
+										sign => sign_out_muti,
 										R => result_muti);
 		
 		div: 			entity work.division(Behave)
 									port map(
 										A => A,
 									   B => B,
-										START => START_in,
+										--START => START_in,
 										RST_N => reset,
 										CLK => clock,
-										sign_bit => sign_out,
-										DONE => done_o,
-										Q => result_div_Q,
-										R => result_div);
+										sign_bit => sign_out_div,
+										Q => result_div,
+										R => result_div_R);
 										
 		convert_binary:		entity work.result_to_BCD(Behavioral)
 									port map(
 										clk_i => clock,
 										data  => Transfer_data_binary,
 										enable_in => enable_num,
+										enable_mux => enable_mux,
+										selec_in => selec,
+										R => result_div_R,
+										sign => sign_out, 
+										overflow_add => overflow_add,
+										overflow_sub => overflow_sub,
 										BCD_digit_1 => BCD_data_digit_1,
 										BCD_digit_2 => BCD_data_digit_2,
 										BCD_digit_3 => BCD_data_digit_3,

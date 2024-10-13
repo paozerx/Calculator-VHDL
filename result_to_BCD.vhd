@@ -8,6 +8,7 @@ entity result_to_BCD is
            enable_in  : in  std_logic;
 			  enable_mux : in std_logic;
 			  sign  : in  std_logic;
+			  sign_input  : in  std_logic;
 			  selec_in  : in  STD_LOGIC_VECTOR (1 downto 0);
            data       : in  STD_LOGIC_VECTOR (19 downto 0);
 			  R       : in  STD_LOGIC_VECTOR (19 downto 0);
@@ -48,8 +49,8 @@ begin
                 int_data_5 <= 12;
                 int_data_6 <= 12;
 					 
-				elsif selec_in = "00" and enable_mux = '1' then
-					if conv_integer(unsigned(R)) / 10 >= 10 or conv_integer(unsigned(data)) / 10 >= 10 then
+				elsif selec_in = "00" and enable_mux = '1' and enable_in = '1' then
+					if conv_integer(unsigned(R)) / 100 >= 10 or conv_integer(unsigned(data)) / 100 >= 10 then
 						 int_data_1 <= 15;
 						 int_data_2 <= 15;
 						 int_data_3 <= 15;
@@ -69,7 +70,7 @@ begin
 						 end if;
 					end if;
 					 
-				elsif selec_in = "11" and enable_mux = '1' and overflow_add = '1' then
+				elsif selec_in = "11" and enable_mux = '1' and overflow_add = '1' and enable_in = '1' then
 					 int_data_1 <= 15;
 					 int_data_2 <= 15;
 					 int_data_3 <= 15;
@@ -77,7 +78,7 @@ begin
 					 int_data_5 <= 15;
 					 int_data_6 <= 15;
 						 
-				elsif selec_in = "10" and enable_mux = '1' and overflow_sub = '1' then
+				elsif selec_in = "10" and enable_mux = '1' and overflow_sub = '1' and enable_in = '1' then
 					 int_data_1 <= 15;
 					 int_data_2 <= 15;
 					 int_data_3 <= 15;
@@ -85,7 +86,7 @@ begin
 					 int_data_5 <= 15;
 					 int_data_6 <= 15;
 					
-            elsif (conv_integer(unsigned(data)) / 10000) >= 10 and enable_mux = '1' and selec_in = "01" then
+            elsif (conv_integer(unsigned(data)) / 10000) >= 10 and enable_mux = '1' and selec_in = "01" and enable_in = '1' then
                 int_data_1 <= 15;
                 int_data_2 <= 15;
                 int_data_3 <= 15;
@@ -99,7 +100,7 @@ begin
                 int_data_3 <= (conv_integer(unsigned(data)) / 100) mod 10;
                 int_data_4 <= (conv_integer(unsigned(data)) / 1000) mod 10;
                 int_data_5 <= (conv_integer(unsigned(data)) / 10000) mod 10;
-                if sign = '1' then
+                if sign = '1' or sign_input = '1' then
 						int_data_6 <= 14;
 					 else 
 						int_data_6 <= 12;

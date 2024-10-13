@@ -40,9 +40,11 @@ architecture converter of top_level is
  signal sign_out_div : STD_LOGIC;
  signal sign_out_muti : STD_LOGIC;
  signal sign_out : STD_LOGIC;
+ signal sign_input : STD_LOGIC;
  signal done_o : std_logic;
  signal overflow_add : std_logic;
  signal overflow_sub : std_logic;
+ 
 
  
 	begin
@@ -55,6 +57,7 @@ architecture converter of top_level is
 										enable => enable_mux,
 										enable_binary => enable_num,
 										selector => selec,
+										sign_input => sign_input,
 										a => A,
 										b => B,
 										clock => clock);
@@ -128,6 +131,7 @@ architecture converter of top_level is
 										data  => Transfer_data_binary,
 										enable_in => enable_num,
 										enable_mux => enable_mux,
+										sign_input => sign_input,
 										selec_in => selec,
 										R => result_div_R,
 										sign => sign_out, 

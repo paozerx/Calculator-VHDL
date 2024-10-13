@@ -1,4 +1,10 @@
 
+State Machine - |top_level|division:div|state
+Name state.S2 state.S1 state.S0 
+state.S0 0 0 0 
+state.S1 0 1 1 
+state.S2 1 0 1 
+
 State Machine - |top_level|main:main|state
 Name state.S6 state.S5 state.S4 state.S3 state.S2 state.S1 state.S0 
 state.S0 0 0 0 0 0 0 0 

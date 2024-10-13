@@ -1,0 +1,1228 @@
+Analysis & Synthesis report for calculator
+Sun Oct 13 16:31:27 2024
+Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |top_level|division:div|state
+  9. State Machine - |top_level|main:main|state
+ 10. User-Specified and Inferred Latches
+ 11. Registers Removed During Synthesis
+ 12. General Register Statistics
+ 13. Inverted Register Statistics
+ 14. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 15. Parameter Settings for User Entity Instance: add_gen:add
+ 16. Parameter Settings for User Entity Instance: sub_gen:sub
+ 17. Parameter Settings for User Entity Instance: Multiplication:multi
+ 18. Parameter Settings for User Entity Instance: division:div
+ 19. Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Div3
+ 20. Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Div0
+ 21. Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Div1
+ 22. Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Mod2
+ 23. Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Mod0
+ 24. Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Div4
+ 25. Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Mod3
+ 26. Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Div2
+ 27. Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Mod1
+ 28. Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Mod4
+ 29. Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Div5
+ 30. Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Mod5
+ 31. Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Mod6
+ 32. Port Connectivity Checks: "sub_gen:sub|full_sub:\adder:0:L0:FA_i"
+ 33. Port Connectivity Checks: "sub_gen:sub"
+ 34. Port Connectivity Checks: "add_gen:add|full_adder:\adder:0:L0:FA_i"
+ 35. Port Connectivity Checks: "add_gen:add"
+ 36. Post-Synthesis Netlist Statistics for Top Partition
+ 37. Elapsed Time Per Partition
+ 38. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++------------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sun Oct 13 16:31:27 2024       ;
+; Quartus Prime Version              ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
+; Revision Name                      ; calculator                                  ;
+; Top-level Entity Name              ; top_level                                   ;
+; Family                             ; MAX 10                                      ;
+; Total logic elements               ; 5,330                                       ;
+;     Total combinational functions  ; 5,259                                       ;
+;     Dedicated logic registers      ; 329                                         ;
+; Total registers                    ; 329                                         ;
+; Total pins                         ; 56                                          ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 0                                           ;
+; Embedded Multiplier 9-bit elements ; 0                                           ;
+; Total PLLs                         ; 0                                           ;
+; UFM blocks                         ; 0                                           ;
+; ADC blocks                         ; 0                                           ;
++------------------------------------+---------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; 10M50DAF484C7G     ;                    ;
+; Top-level entity name                                            ; top_level          ; calculator         ;
+; Family name                                                      ; MAX 10             ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 16          ;
+; Maximum allowed            ; 16          ;
+;                            ;             ;
+; Average used               ; 1.01        ;
+; Maximum used               ; 16          ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.1%      ;
+;     Processor 3            ;   0.1%      ;
+;     Processor 4            ;   0.1%      ;
+;     Processor 5            ;   0.1%      ;
+;     Processor 6            ;   0.1%      ;
+;     Processor 7            ;   0.1%      ;
+;     Processor 8            ;   0.1%      ;
+;     Processors 9-16        ;   0.0%      ;
++----------------------------+-------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                   ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                               ; Library ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
+; add.vhd                          ; yes             ; User VHDL File               ; C:/Users/paova/Downloads/digi lab/calculator/add.vhd                       ;         ;
+; sub.vhd                          ; yes             ; User VHDL File               ; C:/Users/paova/Downloads/digi lab/calculator/sub.vhd                       ;         ;
+; muti.vhd                         ; yes             ; User VHDL File               ; C:/Users/paova/Downloads/digi lab/calculator/muti.vhd                      ;         ;
+; main.vhd                         ; yes             ; User VHDL File               ; C:/Users/paova/Downloads/digi lab/calculator/main.vhd                      ;         ;
+; div.vhd                          ; yes             ; User VHDL File               ; C:/Users/paova/Downloads/digi lab/calculator/div.vhd                       ;         ;
+; BCD_to_7_segmen.vhd              ; yes             ; User VHDL File               ; C:/Users/paova/Downloads/digi lab/calculator/BCD_to_7_segmen.vhd           ;         ;
+; result_to_BCD.vhd                ; yes             ; User VHDL File               ; C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd             ;         ;
+; top_level.vhd                    ; yes             ; User VHDL File               ; C:/Users/paova/Downloads/digi lab/calculator/top_level.vhd                 ;         ;
+; mux_to_box.vhd                   ; yes             ; User VHDL File               ; C:/Users/paova/Downloads/digi lab/calculator/mux_to_box.vhd                ;         ;
+; mux_to_mux.vhd                   ; yes             ; User VHDL File               ; C:/Users/paova/Downloads/digi lab/calculator/mux_to_mux.vhd                ;         ;
+; mux_sign.vhd                     ; yes             ; User VHDL File               ; C:/Users/paova/Downloads/digi lab/calculator/mux_sign.vhd                  ;         ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_divide.tdf      ;         ;
+; abs_divider.inc                  ; yes             ; Megafunction                 ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/abs_divider.inc     ;         ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                 ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/sign_div_unsign.inc ;         ;
+; aglobal201.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/aglobal201.inc      ;         ;
+; db/lpm_divide_4vl.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/lpm_divide_4vl.tdf         ;         ;
+; db/sign_div_unsign_6nh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/sign_div_unsign_6nh.tdf    ;         ;
+; db/alt_u_div_mke.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_mke.tdf          ;         ;
+; db/add_sub_t3c.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/add_sub_t3c.tdf            ;         ;
+; db/add_sub_u3c.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/add_sub_u3c.tdf            ;         ;
+; db/lpm_divide_mtl.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/lpm_divide_mtl.tdf         ;         ;
+; db/sign_div_unsign_olh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/sign_div_unsign_olh.tdf    ;         ;
+; db/alt_u_div_qhe.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_qhe.tdf          ;         ;
+; db/lpm_divide_4nl.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/lpm_divide_4nl.tdf         ;         ;
+; db/sign_div_unsign_3nh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/sign_div_unsign_3nh.tdf    ;         ;
+; db/alt_u_div_gke.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf          ;         ;
+; db/lpm_divide_jtl.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/lpm_divide_jtl.tdf         ;         ;
+; db/sign_div_unsign_llh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/sign_div_unsign_llh.tdf    ;         ;
+; db/alt_u_div_khe.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_khe.tdf          ;         ;
+; db/lpm_divide_0vl.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/lpm_divide_0vl.tdf         ;         ;
+; db/sign_div_unsign_2nh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/sign_div_unsign_2nh.tdf    ;         ;
+; db/alt_u_div_eke.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_eke.tdf          ;         ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
+
+
++-----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary               ;
++---------------------------------------------+-------------+
+; Resource                                    ; Usage       ;
++---------------------------------------------+-------------+
+; Estimated Total logic elements              ; 5,330       ;
+;                                             ;             ;
+; Total combinational functions               ; 5259        ;
+; Logic element usage by number of LUT inputs ;             ;
+;     -- 4 input functions                    ; 1457        ;
+;     -- 3 input functions                    ; 1599        ;
+;     -- <=2 input functions                  ; 2203        ;
+;                                             ;             ;
+; Logic elements by mode                      ;             ;
+;     -- normal mode                          ; 3592        ;
+;     -- arithmetic mode                      ; 1667        ;
+;                                             ;             ;
+; Total registers                             ; 329         ;
+;     -- Dedicated logic registers            ; 329         ;
+;     -- I/O registers                        ; 0           ;
+;                                             ;             ;
+; I/O pins                                    ; 56          ;
+;                                             ;             ;
+; Embedded Multiplier 9-bit elements          ; 0           ;
+;                                             ;             ;
+; Maximum fan-out node                        ; clock~input ;
+; Maximum fan-out                             ; 329         ;
+; Total fan-out                               ; 15874       ;
+; Average fan-out                             ; 2.78        ;
++---------------------------------------------+-------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                                                           ;
++-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-----------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                                                                                                     ; Entity Name         ; Library Name ;
++-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-----------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+; |top_level                                ; 5259 (0)            ; 329 (0)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 56   ; 0            ; 0          ; |top_level                                                                                                                              ; top_level           ; work         ;
+;    |BCD_to_7_segmen:seven_seg_display_1|  ; 7 (7)               ; 7 (7)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|BCD_to_7_segmen:seven_seg_display_1                                                                                          ; BCD_to_7_segmen     ; work         ;
+;    |BCD_to_7_segmen:seven_seg_display_2|  ; 7 (7)               ; 7 (7)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|BCD_to_7_segmen:seven_seg_display_2                                                                                          ; BCD_to_7_segmen     ; work         ;
+;    |BCD_to_7_segmen:seven_seg_display_3|  ; 7 (7)               ; 7 (7)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|BCD_to_7_segmen:seven_seg_display_3                                                                                          ; BCD_to_7_segmen     ; work         ;
+;    |BCD_to_7_segmen:seven_seg_display_4|  ; 7 (7)               ; 7 (7)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|BCD_to_7_segmen:seven_seg_display_4                                                                                          ; BCD_to_7_segmen     ; work         ;
+;    |BCD_to_7_segmen:seven_seg_display_5|  ; 7 (7)               ; 7 (7)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|BCD_to_7_segmen:seven_seg_display_5                                                                                          ; BCD_to_7_segmen     ; work         ;
+;    |BCD_to_7_segmen:seven_seg_display_6|  ; 7 (7)               ; 7 (7)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|BCD_to_7_segmen:seven_seg_display_6                                                                                          ; BCD_to_7_segmen     ; work         ;
+;    |Multiplication:multi|                 ; 115 (115)           ; 104 (104)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|Multiplication:multi                                                                                                         ; Multiplication      ; work         ;
+;    |add_gen:add|                          ; 9 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|add_gen:add                                                                                                                  ; add_gen             ; work         ;
+;       |full_adder:\adder:1:L1:FA_i|       ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|add_gen:add|full_adder:\adder:1:L1:FA_i                                                                                      ; full_adder          ; work         ;
+;       |full_adder:\adder:2:L1:FA_i|       ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|add_gen:add|full_adder:\adder:2:L1:FA_i                                                                                      ; full_adder          ; work         ;
+;       |full_adder:\adder:3:L1:FA_i|       ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|add_gen:add|full_adder:\adder:3:L1:FA_i                                                                                      ; full_adder          ; work         ;
+;       |full_adder:\adder:4:L1:FA_i|       ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|add_gen:add|full_adder:\adder:4:L1:FA_i                                                                                      ; full_adder          ; work         ;
+;       |full_adder:\adder:5:L1:FA_i|       ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|add_gen:add|full_adder:\adder:5:L1:FA_i                                                                                      ; full_adder          ; work         ;
+;       |full_adder:\adder:6:L1:FA_i|       ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|add_gen:add|full_adder:\adder:6:L1:FA_i                                                                                      ; full_adder          ; work         ;
+;       |full_adder:\adder:7:L1:FA_i|       ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|add_gen:add|full_adder:\adder:7:L1:FA_i                                                                                      ; full_adder          ; work         ;
+;       |full_adder:\adder:9:L2:FA_i|       ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|add_gen:add|full_adder:\adder:9:L2:FA_i                                                                                      ; full_adder          ; work         ;
+;    |division:div|                         ; 213 (213)           ; 116 (116)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|division:div                                                                                                                 ; division            ; work         ;
+;    |main:main|                            ; 43 (43)             ; 43 (43)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|main:main                                                                                                                    ; main                ; work         ;
+;    |mux_sign:mux_sign|                    ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|mux_sign:mux_sign                                                                                                            ; mux_sign            ; work         ;
+;    |mux_to_box:mux_2|                     ; 44 (44)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|mux_to_box:mux_2                                                                                                             ; mux_to_box          ; work         ;
+;    |mux_to_mux:mux_4|                     ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|mux_to_mux:mux_4                                                                                                             ; mux_to_mux          ; work         ;
+;    |result_to_BCD:convert_binary|         ; 4779 (92)           ; 24 (24)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary                                                                                                 ; result_to_BCD       ; work         ;
+;       |lpm_divide:Div0|                   ; 267 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div0                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_mtl:auto_generated|  ; 267 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div0|lpm_divide_mtl:auto_generated                                                   ; lpm_divide_mtl      ; work         ;
+;             |sign_div_unsign_olh:divider| ; 267 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div0|lpm_divide_mtl:auto_generated|sign_div_unsign_olh:divider                       ; sign_div_unsign_olh ; work         ;
+;                |alt_u_div_qhe:divider|    ; 267 (267)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div0|lpm_divide_mtl:auto_generated|sign_div_unsign_olh:divider|alt_u_div_qhe:divider ; alt_u_div_qhe       ; work         ;
+;       |lpm_divide:Div1|                   ; 289 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div1                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_mtl:auto_generated|  ; 289 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div1|lpm_divide_mtl:auto_generated                                                   ; lpm_divide_mtl      ; work         ;
+;             |sign_div_unsign_olh:divider| ; 289 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div1|lpm_divide_mtl:auto_generated|sign_div_unsign_olh:divider                       ; sign_div_unsign_olh ; work         ;
+;                |alt_u_div_qhe:divider|    ; 289 (289)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div1|lpm_divide_mtl:auto_generated|sign_div_unsign_olh:divider|alt_u_div_qhe:divider ; alt_u_div_qhe       ; work         ;
+;       |lpm_divide:Div2|                   ; 212 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div2                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_jtl:auto_generated|  ; 212 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div2|lpm_divide_jtl:auto_generated                                                   ; lpm_divide_jtl      ; work         ;
+;             |sign_div_unsign_llh:divider| ; 212 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div2|lpm_divide_jtl:auto_generated|sign_div_unsign_llh:divider                       ; sign_div_unsign_llh ; work         ;
+;                |alt_u_div_khe:divider|    ; 212 (212)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div2|lpm_divide_jtl:auto_generated|sign_div_unsign_llh:divider|alt_u_div_khe:divider ; alt_u_div_khe       ; work         ;
+;       |lpm_divide:Div3|                   ; 251 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div3                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_4vl:auto_generated|  ; 251 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div3|lpm_divide_4vl:auto_generated                                                   ; lpm_divide_4vl      ; work         ;
+;             |sign_div_unsign_6nh:divider| ; 251 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div3|lpm_divide_4vl:auto_generated|sign_div_unsign_6nh:divider                       ; sign_div_unsign_6nh ; work         ;
+;                |alt_u_div_mke:divider|    ; 251 (251)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div3|lpm_divide_4vl:auto_generated|sign_div_unsign_6nh:divider|alt_u_div_mke:divider ; alt_u_div_mke       ; work         ;
+;       |lpm_divide:Div4|                   ; 212 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div4                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_jtl:auto_generated|  ; 212 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div4|lpm_divide_jtl:auto_generated                                                   ; lpm_divide_jtl      ; work         ;
+;             |sign_div_unsign_llh:divider| ; 212 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div4|lpm_divide_jtl:auto_generated|sign_div_unsign_llh:divider                       ; sign_div_unsign_llh ; work         ;
+;                |alt_u_div_khe:divider|    ; 212 (212)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div4|lpm_divide_jtl:auto_generated|sign_div_unsign_llh:divider|alt_u_div_khe:divider ; alt_u_div_khe       ; work         ;
+;       |lpm_divide:Div5|                   ; 309 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div5                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_0vl:auto_generated|  ; 309 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div5|lpm_divide_0vl:auto_generated                                                   ; lpm_divide_0vl      ; work         ;
+;             |sign_div_unsign_2nh:divider| ; 309 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div5|lpm_divide_0vl:auto_generated|sign_div_unsign_2nh:divider                       ; sign_div_unsign_2nh ; work         ;
+;                |alt_u_div_eke:divider|    ; 309 (309)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Div5|lpm_divide_0vl:auto_generated|sign_div_unsign_2nh:divider|alt_u_div_eke:divider ; alt_u_div_eke       ; work         ;
+;       |lpm_divide:Mod0|                   ; 572 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod0                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_4nl:auto_generated|  ; 572 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod0|lpm_divide_4nl:auto_generated                                                   ; lpm_divide_4nl      ; work         ;
+;             |sign_div_unsign_3nh:divider| ; 572 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod0|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider                       ; sign_div_unsign_3nh ; work         ;
+;                |alt_u_div_gke:divider|    ; 572 (572)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod0|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider ; alt_u_div_gke       ; work         ;
+;       |lpm_divide:Mod1|                   ; 525 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod1                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_4nl:auto_generated|  ; 525 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod1|lpm_divide_4nl:auto_generated                                                   ; lpm_divide_4nl      ; work         ;
+;             |sign_div_unsign_3nh:divider| ; 525 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod1|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider                       ; sign_div_unsign_3nh ; work         ;
+;                |alt_u_div_gke:divider|    ; 525 (525)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod1|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider ; alt_u_div_gke       ; work         ;
+;       |lpm_divide:Mod2|                   ; 574 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod2                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_4nl:auto_generated|  ; 574 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod2|lpm_divide_4nl:auto_generated                                                   ; lpm_divide_4nl      ; work         ;
+;             |sign_div_unsign_3nh:divider| ; 574 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod2|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider                       ; sign_div_unsign_3nh ; work         ;
+;                |alt_u_div_gke:divider|    ; 574 (574)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod2|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider ; alt_u_div_gke       ; work         ;
+;       |lpm_divide:Mod3|                   ; 528 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod3                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_4nl:auto_generated|  ; 528 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod3|lpm_divide_4nl:auto_generated                                                   ; lpm_divide_4nl      ; work         ;
+;             |sign_div_unsign_3nh:divider| ; 528 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod3|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider                       ; sign_div_unsign_3nh ; work         ;
+;                |alt_u_div_gke:divider|    ; 528 (528)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod3|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider ; alt_u_div_gke       ; work         ;
+;       |lpm_divide:Mod4|                   ; 455 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod4                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_4nl:auto_generated|  ; 455 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod4|lpm_divide_4nl:auto_generated                                                   ; lpm_divide_4nl      ; work         ;
+;             |sign_div_unsign_3nh:divider| ; 455 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod4|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider                       ; sign_div_unsign_3nh ; work         ;
+;                |alt_u_div_gke:divider|    ; 455 (455)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod4|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider ; alt_u_div_gke       ; work         ;
+;       |lpm_divide:Mod5|                   ; 329 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod5                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_4nl:auto_generated|  ; 329 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod5|lpm_divide_4nl:auto_generated                                                   ; lpm_divide_4nl      ; work         ;
+;             |sign_div_unsign_3nh:divider| ; 329 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod5|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider                       ; sign_div_unsign_3nh ; work         ;
+;                |alt_u_div_gke:divider|    ; 329 (329)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod5|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider ; alt_u_div_gke       ; work         ;
+;       |lpm_divide:Mod6|                   ; 164 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod6                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_4nl:auto_generated|  ; 164 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod6|lpm_divide_4nl:auto_generated                                                   ; lpm_divide_4nl      ; work         ;
+;             |sign_div_unsign_3nh:divider| ; 164 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod6|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider                       ; sign_div_unsign_3nh ; work         ;
+;                |alt_u_div_gke:divider|    ; 164 (164)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|result_to_BCD:convert_binary|lpm_divide:Mod6|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider ; alt_u_div_gke       ; work         ;
+;    |sub_gen:sub|                          ; 11 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|sub_gen:sub                                                                                                                  ; sub_gen             ; work         ;
+;       |full_sub:\adder:1:L1:FA_i|         ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|sub_gen:sub|full_sub:\adder:1:L1:FA_i                                                                                        ; full_sub            ; work         ;
+;       |full_sub:\adder:2:L1:FA_i|         ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|sub_gen:sub|full_sub:\adder:2:L1:FA_i                                                                                        ; full_sub            ; work         ;
+;       |full_sub:\adder:4:L1:FA_i|         ; 4 (4)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|sub_gen:sub|full_sub:\adder:4:L1:FA_i                                                                                        ; full_sub            ; work         ;
+;       |full_sub:\adder:5:L1:FA_i|         ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|sub_gen:sub|full_sub:\adder:5:L1:FA_i                                                                                        ; full_sub            ; work         ;
+;       |full_sub:\adder:6:L1:FA_i|         ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|sub_gen:sub|full_sub:\adder:6:L1:FA_i                                                                                        ; full_sub            ; work         ;
+;       |full_sub:\adder:7:L1:FA_i|         ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|sub_gen:sub|full_sub:\adder:7:L1:FA_i                                                                                        ; full_sub            ; work         ;
+;       |full_sub:\adder:9:L2:FA_i|         ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |top_level|sub_gen:sub|full_sub:\adder:9:L2:FA_i                                                                                        ; full_sub            ; work         ;
++-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-----------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------+
+; State Machine - |top_level|division:div|state ;
++----------+----------+----------+--------------+
+; Name     ; state.S2 ; state.S1 ; state.S0     ;
++----------+----------+----------+--------------+
+; state.S0 ; 0        ; 0        ; 0            ;
+; state.S1 ; 0        ; 1        ; 1            ;
+; state.S2 ; 1        ; 0        ; 1            ;
++----------+----------+----------+--------------+
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------+
+; State Machine - |top_level|main:main|state                                            ;
++----------+----------+----------+----------+----------+----------+----------+----------+
+; Name     ; state.S6 ; state.S5 ; state.S4 ; state.S3 ; state.S2 ; state.S1 ; state.S0 ;
++----------+----------+----------+----------+----------+----------+----------+----------+
+; state.S0 ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ;
+; state.S1 ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ; 1        ;
+; state.S2 ; 0        ; 0        ; 0        ; 0        ; 1        ; 0        ; 1        ;
+; state.S3 ; 0        ; 0        ; 0        ; 1        ; 0        ; 0        ; 1        ;
+; state.S4 ; 0        ; 0        ; 1        ; 0        ; 0        ; 0        ; 1        ;
+; state.S5 ; 0        ; 1        ; 0        ; 0        ; 0        ; 0        ; 1        ;
+; state.S6 ; 1        ; 0        ; 0        ; 0        ; 0        ; 0        ; 1        ;
++----------+----------+----------+----------+----------+----------+----------+----------+
+
+
++------------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                  ;
++-----------------------------------------------------+-----------------------+------------------------+
+; Latch Name                                          ; Latch Enable Signal   ; Free of Timing Hazards ;
++-----------------------------------------------------+-----------------------+------------------------+
+; division:div|sign_bit_data                          ; GND                   ; yes                    ;
+; division:div|pro_a[0]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_a[1]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_a[2]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_a[3]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_b[9]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_b[8]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_b[7]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_b[6]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_b[5]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_b[4]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_b[3]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_b[2]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_b[1]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_b[0]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_a[9]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_a[8]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_a[7]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_a[6]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_a[5]                               ; division:div|pro_b[0] ; yes                    ;
+; division:div|pro_a[4]                               ; division:div|pro_b[0] ; yes                    ;
+; Number of user-specified and inferred latches = 21  ;                       ;                        ;
++-----------------------------------------------------+-----------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++--------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                             ;
++---------------------------------------+----------------------------------------+
+; Register name                         ; Reason for Removal                     ;
++---------------------------------------+----------------------------------------+
+; main:main|input_to[11..18]            ; Merged with main:main|input_to[10]     ;
+; main:main|input_to[10]                ; Stuck at GND due to stuck port data_in ;
+; Total Number of Removed Registers = 9 ;                                        ;
++---------------------------------------+----------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 329   ;
+; Number of registers using Synchronous Clear  ; 52    ;
+; Number of registers using Synchronous Load   ; 1     ;
+; Number of registers using Asynchronous Clear ; 189   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 242   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; Multiplication:multi|sign              ; 1       ;
+; Total number of inverted registers = 1 ;         ;
++----------------------------------------+---------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------+
+; 3:1                ; 20 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; Yes        ; |top_level|Multiplication:multi|Data_Product[10]      ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |top_level|Multiplication:multi|Data_B[9]             ;
+; 3:1                ; 9 bits    ; 18 LEs        ; 18 LEs               ; 0 LEs                  ; Yes        ; |top_level|Multiplication:multi|Data_A[1]             ;
+; 4:1                ; 51 bits   ; 102 LEs       ; 51 LEs               ; 51 LEs                 ; Yes        ; |top_level|division:div|bit_counter[6]                ;
+; 4:1                ; 9 bits    ; 18 LEs        ; 18 LEs               ; 0 LEs                  ; Yes        ; |top_level|division:div|Data_B[16]                    ;
+; 5:1                ; 9 bits    ; 27 LEs        ; 18 LEs               ; 9 LEs                  ; Yes        ; |top_level|division:div|Data_A[17]                    ;
+; 5:1                ; 10 bits   ; 30 LEs        ; 20 LEs               ; 10 LEs                 ; Yes        ; |top_level|division:div|Data_A[3]                     ;
+; 7:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_level|result_to_BCD:convert_binary|int_data_3[3] ;
+; 8:1                ; 17 bits   ; 85 LEs        ; 68 LEs               ; 17 LEs                 ; Yes        ; |top_level|result_to_BCD:convert_binary|int_data_6[1] ;
+; 7:1                ; 10 bits   ; 40 LEs        ; 10 LEs               ; 30 LEs                 ; Yes        ; |top_level|main:main|input_to[4]                      ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |top_level|mux_to_box:mux_2|output[15]                ;
+; 5:1                ; 9 bits    ; 27 LEs        ; 27 LEs               ; 0 LEs                  ; No         ; |top_level|mux_to_box:mux_2|output[6]                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------+
+
+
++----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: add_gen:add ;
++----------------+-------+---------------------------------+
+; Parameter Name ; Value ; Type                            ;
++----------------+-------+---------------------------------+
+; n              ; 10    ; Signed Integer                  ;
++----------------+-------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sub_gen:sub ;
++----------------+-------+---------------------------------+
+; Parameter Name ; Value ; Type                            ;
++----------------+-------+---------------------------------+
+; n              ; 10    ; Signed Integer                  ;
++----------------+-------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Multiplication:multi ;
++----------------+-------+------------------------------------------+
+; Parameter Name ; Value ; Type                                     ;
++----------------+-------+------------------------------------------+
+; n              ; 10    ; Signed Integer                           ;
++----------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: division:div ;
++----------------+-------+----------------------------------+
+; Parameter Name ; Value ; Type                             ;
++----------------+-------+----------------------------------+
+; n              ; 10    ; Signed Integer                   ;
++----------------+-------+----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Div3 ;
++------------------------+----------------+-----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                ;
++------------------------+----------------+-----------------------------------------------------+
+; LPM_WIDTHN             ; 20             ; Untyped                                             ;
+; LPM_WIDTHD             ; 14             ; Untyped                                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                             ;
+; CBXI_PARAMETER         ; lpm_divide_4vl ; Untyped                                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                      ;
++------------------------+----------------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Div0 ;
++------------------------+----------------+-----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                ;
++------------------------+----------------+-----------------------------------------------------+
+; LPM_WIDTHN             ; 20             ; Untyped                                             ;
+; LPM_WIDTHD             ; 7              ; Untyped                                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                             ;
+; CBXI_PARAMETER         ; lpm_divide_mtl ; Untyped                                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                      ;
++------------------------+----------------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Div1 ;
++------------------------+----------------+-----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                ;
++------------------------+----------------+-----------------------------------------------------+
+; LPM_WIDTHN             ; 20             ; Untyped                                             ;
+; LPM_WIDTHD             ; 7              ; Untyped                                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                             ;
+; CBXI_PARAMETER         ; lpm_divide_mtl ; Untyped                                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                      ;
++------------------------+----------------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Mod2 ;
++------------------------+----------------+-----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                ;
++------------------------+----------------+-----------------------------------------------------+
+; LPM_WIDTHN             ; 20             ; Untyped                                             ;
+; LPM_WIDTHD             ; 20             ; Untyped                                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                             ;
+; CBXI_PARAMETER         ; lpm_divide_4nl ; Untyped                                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                      ;
++------------------------+----------------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Mod0 ;
++------------------------+----------------+-----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                ;
++------------------------+----------------+-----------------------------------------------------+
+; LPM_WIDTHN             ; 20             ; Untyped                                             ;
+; LPM_WIDTHD             ; 20             ; Untyped                                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                             ;
+; CBXI_PARAMETER         ; lpm_divide_4nl ; Untyped                                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                      ;
++------------------------+----------------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Div4 ;
++------------------------+----------------+-----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                ;
++------------------------+----------------+-----------------------------------------------------+
+; LPM_WIDTHN             ; 20             ; Untyped                                             ;
+; LPM_WIDTHD             ; 4              ; Untyped                                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                             ;
+; CBXI_PARAMETER         ; lpm_divide_jtl ; Untyped                                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                      ;
++------------------------+----------------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Mod3 ;
++------------------------+----------------+-----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                ;
++------------------------+----------------+-----------------------------------------------------+
+; LPM_WIDTHN             ; 20             ; Untyped                                             ;
+; LPM_WIDTHD             ; 20             ; Untyped                                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                             ;
+; CBXI_PARAMETER         ; lpm_divide_4nl ; Untyped                                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                      ;
++------------------------+----------------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Div2 ;
++------------------------+----------------+-----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                ;
++------------------------+----------------+-----------------------------------------------------+
+; LPM_WIDTHN             ; 20             ; Untyped                                             ;
+; LPM_WIDTHD             ; 4              ; Untyped                                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                             ;
+; CBXI_PARAMETER         ; lpm_divide_jtl ; Untyped                                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                      ;
++------------------------+----------------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Mod1 ;
++------------------------+----------------+-----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                ;
++------------------------+----------------+-----------------------------------------------------+
+; LPM_WIDTHN             ; 20             ; Untyped                                             ;
+; LPM_WIDTHD             ; 20             ; Untyped                                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                             ;
+; CBXI_PARAMETER         ; lpm_divide_4nl ; Untyped                                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                      ;
++------------------------+----------------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Mod4 ;
++------------------------+----------------+-----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                ;
++------------------------+----------------+-----------------------------------------------------+
+; LPM_WIDTHN             ; 20             ; Untyped                                             ;
+; LPM_WIDTHD             ; 20             ; Untyped                                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                             ;
+; CBXI_PARAMETER         ; lpm_divide_4nl ; Untyped                                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                      ;
++------------------------+----------------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Div5 ;
++------------------------+----------------+-----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                ;
++------------------------+----------------+-----------------------------------------------------+
+; LPM_WIDTHN             ; 20             ; Untyped                                             ;
+; LPM_WIDTHD             ; 10             ; Untyped                                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                             ;
+; CBXI_PARAMETER         ; lpm_divide_0vl ; Untyped                                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                      ;
++------------------------+----------------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Mod5 ;
++------------------------+----------------+-----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                ;
++------------------------+----------------+-----------------------------------------------------+
+; LPM_WIDTHN             ; 20             ; Untyped                                             ;
+; LPM_WIDTHD             ; 20             ; Untyped                                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                             ;
+; CBXI_PARAMETER         ; lpm_divide_4nl ; Untyped                                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                      ;
++------------------------+----------------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: result_to_BCD:convert_binary|lpm_divide:Mod6 ;
++------------------------+----------------+-----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                ;
++------------------------+----------------+-----------------------------------------------------+
+; LPM_WIDTHN             ; 20             ; Untyped                                             ;
+; LPM_WIDTHD             ; 20             ; Untyped                                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                             ;
+; CBXI_PARAMETER         ; lpm_divide_4nl ; Untyped                                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                      ;
++------------------------+----------------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------+
+; Port Connectivity Checks: "sub_gen:sub|full_sub:\adder:0:L0:FA_i" ;
++------+-------+----------+-----------------------------------------+
+; Port ; Type  ; Severity ; Details                                 ;
++------+-------+----------+-----------------------------------------+
+; c_in ; Input ; Info     ; Stuck at VCC                            ;
++------+-------+----------+-----------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "sub_gen:sub"                                                                         ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; c_in  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; c_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------+
+; Port Connectivity Checks: "add_gen:add|full_adder:\adder:0:L0:FA_i" ;
++------+-------+----------+-------------------------------------------+
+; Port ; Type  ; Severity ; Details                                   ;
++------+-------+----------+-------------------------------------------+
+; c_in ; Input ; Info     ; Stuck at GND                              ;
++------+-------+----------+-------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "add_gen:add"                                                                         ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; c_in  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; c_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 56                          ;
+; cycloneiii_ff         ; 329                         ;
+;     CLR               ; 19                          ;
+;     CLR SLD           ; 1                           ;
+;     ENA               ; 41                          ;
+;     ENA CLR           ; 149                         ;
+;     ENA CLR SCLR      ; 20                          ;
+;     ENA SCLR          ; 32                          ;
+;     plain             ; 67                          ;
+; cycloneiii_lcell_comb ; 5259                        ;
+;     arith             ; 1667                        ;
+;         1 data inputs ; 34                          ;
+;         2 data inputs ; 161                         ;
+;         3 data inputs ; 1472                        ;
+;     normal            ; 3592                        ;
+;         0 data inputs ; 164                         ;
+;         1 data inputs ; 34                          ;
+;         2 data inputs ; 1810                        ;
+;         3 data inputs ; 127                         ;
+;         4 data inputs ; 1457                        ;
+;                       ;                             ;
+; Max LUT depth         ; 56.50                       ;
+; Average LUT depth     ; 42.21                       ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:06     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+    Info: Processing started: Sun Oct 13 16:31:14 2024
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off calculator -c calculator
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
+Info (12021): Found 4 design units, including 2 entities, in source file add.vhd
+    Info (12022): Found design unit 1: full_adder-data_flow File: C:/Users/paova/Downloads/digi lab/calculator/add.vhd Line: 11
+    Info (12022): Found design unit 2: add_gen-data_flow File: C:/Users/paova/Downloads/digi lab/calculator/add.vhd Line: 33
+    Info (12023): Found entity 1: full_adder File: C:/Users/paova/Downloads/digi lab/calculator/add.vhd Line: 4
+    Info (12023): Found entity 2: add_gen File: C:/Users/paova/Downloads/digi lab/calculator/add.vhd Line: 22
+Info (12021): Found 4 design units, including 2 entities, in source file sub.vhd
+    Info (12022): Found design unit 1: full_sub-data_flow File: C:/Users/paova/Downloads/digi lab/calculator/sub.vhd Line: 11
+    Info (12022): Found design unit 2: sub_gen-data_flow File: C:/Users/paova/Downloads/digi lab/calculator/sub.vhd Line: 33
+    Info (12023): Found entity 1: full_sub File: C:/Users/paova/Downloads/digi lab/calculator/sub.vhd Line: 4
+    Info (12023): Found entity 2: sub_gen File: C:/Users/paova/Downloads/digi lab/calculator/sub.vhd Line: 22
+Info (12021): Found 2 design units, including 1 entities, in source file muti.vhd
+    Info (12022): Found design unit 1: Multiplication-Behave File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 14
+    Info (12023): Found entity 1: Multiplication File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file main.vhd
+    Info (12022): Found design unit 1: main-Behavioral File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 18
+    Info (12023): Found entity 1: main File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file div.vhd
+    Info (12022): Found design unit 1: division-Behave File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 16
+    Info (12023): Found entity 1: division File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file bcd_to_7_segmen.vhd
+    Info (12022): Found design unit 1: BCD_to_7_segmen-data_process File: C:/Users/paova/Downloads/digi lab/calculator/BCD_to_7_segmen.vhd Line: 15
+    Info (12023): Found entity 1: BCD_to_7_segmen File: C:/Users/paova/Downloads/digi lab/calculator/BCD_to_7_segmen.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file result_to_bcd.vhd
+    Info (12022): Found design unit 1: result_to_BCD-Behavioral File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 25
+    Info (12023): Found entity 1: result_to_BCD File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file top_level.vhd
+    Info (12022): Found design unit 1: top_level-converter File: C:/Users/paova/Downloads/digi lab/calculator/top_level.vhd Line: 20
+    Info (12023): Found entity 1: top_level File: C:/Users/paova/Downloads/digi lab/calculator/top_level.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file mux_to_box.vhd
+    Info (12022): Found design unit 1: mux_to_box-Behavioral File: C:/Users/paova/Downloads/digi lab/calculator/mux_to_box.vhd Line: 14
+    Info (12023): Found entity 1: mux_to_box File: C:/Users/paova/Downloads/digi lab/calculator/mux_to_box.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file mux_to_mux.vhd
+    Info (12022): Found design unit 1: mux_to_mux-Behavioral File: C:/Users/paova/Downloads/digi lab/calculator/mux_to_mux.vhd Line: 15
+    Info (12023): Found entity 1: mux_to_mux File: C:/Users/paova/Downloads/digi lab/calculator/mux_to_mux.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file mux_sign.vhd
+    Info (12022): Found design unit 1: mux_sign-Behavioral File: C:/Users/paova/Downloads/digi lab/calculator/mux_sign.vhd Line: 15
+    Info (12023): Found entity 1: mux_sign File: C:/Users/paova/Downloads/digi lab/calculator/mux_sign.vhd Line: 6
+Info (12127): Elaborating entity "top_level" for the top level hierarchy
+Info (12129): Elaborating entity "main" using architecture "A:behavioral" for hierarchy "main:main" File: C:/Users/paova/Downloads/digi lab/calculator/top_level.vhd Line: 51
+Info (12129): Elaborating entity "mux_to_box" using architecture "A:behavioral" for hierarchy "mux_to_box:mux_2" File: C:/Users/paova/Downloads/digi lab/calculator/top_level.vhd Line: 65
+Info (12129): Elaborating entity "mux_to_mux" using architecture "A:behavioral" for hierarchy "mux_to_mux:mux_4" File: C:/Users/paova/Downloads/digi lab/calculator/top_level.vhd Line: 73
+Info (12129): Elaborating entity "mux_sign" using architecture "A:behavioral" for hierarchy "mux_sign:mux_sign" File: C:/Users/paova/Downloads/digi lab/calculator/top_level.vhd Line: 82
+Warning (10492): VHDL Process Statement warning at mux_sign.vhd(25): signal "sign_add" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/paova/Downloads/digi lab/calculator/mux_sign.vhd Line: 25
+Warning (10492): VHDL Process Statement warning at mux_sign.vhd(27): signal "sign_sub" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/paova/Downloads/digi lab/calculator/mux_sign.vhd Line: 27
+Info (12129): Elaborating entity "add_gen" using architecture "A:data_flow" for hierarchy "add_gen:add" File: C:/Users/paova/Downloads/digi lab/calculator/top_level.vhd Line: 91
+Warning (10873): Using initial value X (don't care) for net "sum[19..10]" at add.vhd(29) File: C:/Users/paova/Downloads/digi lab/calculator/add.vhd Line: 29
+Info (12129): Elaborating entity "full_adder" using architecture "A:data_flow" for hierarchy "add_gen:add|full_adder:\adder:0:L0:FA_i" File: C:/Users/paova/Downloads/digi lab/calculator/add.vhd Line: 48
+Info (12129): Elaborating entity "sub_gen" using architecture "A:data_flow" for hierarchy "sub_gen:sub" File: C:/Users/paova/Downloads/digi lab/calculator/top_level.vhd Line: 99
+Warning (10873): Using initial value X (don't care) for net "sum[19..10]" at sub.vhd(29) File: C:/Users/paova/Downloads/digi lab/calculator/sub.vhd Line: 29
+Info (12129): Elaborating entity "full_sub" using architecture "A:data_flow" for hierarchy "sub_gen:sub|full_sub:\adder:0:L0:FA_i" File: C:/Users/paova/Downloads/digi lab/calculator/sub.vhd Line: 48
+Info (12129): Elaborating entity "Multiplication" using architecture "A:behave" for hierarchy "Multiplication:multi" File: C:/Users/paova/Downloads/digi lab/calculator/top_level.vhd Line: 107
+Warning (10631): VHDL Process Statement warning at muti.vhd(28): inferring latch(es) for signal or variable "A_ex", which holds its previous value in one or more paths through the process File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (10631): VHDL Process Statement warning at muti.vhd(28): inferring latch(es) for signal or variable "B_ex", which holds its previous value in one or more paths through the process File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (10631): VHDL Process Statement warning at muti.vhd(50): inferring latch(es) for signal or variable "sign_iex", which holds its previous value in one or more paths through the process File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 50
+Info (10041): Inferred latch for "sign_iex" at muti.vhd(50) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 50
+Info (10041): Inferred latch for "B_ex[0]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "B_ex[1]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "B_ex[2]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "B_ex[3]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "B_ex[4]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "B_ex[5]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "B_ex[6]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "B_ex[7]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "B_ex[8]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "B_ex[9]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "A_ex[0]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "A_ex[1]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "A_ex[2]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "A_ex[3]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "A_ex[4]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "A_ex[5]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "A_ex[6]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "A_ex[7]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "A_ex[8]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (10041): Inferred latch for "A_ex[9]" at muti.vhd(28) File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (12129): Elaborating entity "division" using architecture "A:behave" for hierarchy "division:div" File: C:/Users/paova/Downloads/digi lab/calculator/top_level.vhd Line: 117
+Warning (10631): VHDL Process Statement warning at div.vhd(31): inferring latch(es) for signal or variable "pro_a", which holds its previous value in one or more paths through the process File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (10631): VHDL Process Statement warning at div.vhd(31): inferring latch(es) for signal or variable "pro_b", which holds its previous value in one or more paths through the process File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (10631): VHDL Process Statement warning at div.vhd(51): inferring latch(es) for signal or variable "sign_bit_data", which holds its previous value in one or more paths through the process File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 51
+Warning (10631): VHDL Process Statement warning at div.vhd(51): inferring latch(es) for signal or variable "Q", which holds its previous value in one or more paths through the process File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 51
+Info (10041): Inferred latch for "Q[10]" at div.vhd(51) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 51
+Info (10041): Inferred latch for "Q[11]" at div.vhd(51) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 51
+Info (10041): Inferred latch for "Q[12]" at div.vhd(51) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 51
+Info (10041): Inferred latch for "Q[13]" at div.vhd(51) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 51
+Info (10041): Inferred latch for "Q[14]" at div.vhd(51) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 51
+Info (10041): Inferred latch for "Q[15]" at div.vhd(51) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 51
+Info (10041): Inferred latch for "Q[16]" at div.vhd(51) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 51
+Info (10041): Inferred latch for "Q[17]" at div.vhd(51) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 51
+Info (10041): Inferred latch for "Q[18]" at div.vhd(51) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 51
+Info (10041): Inferred latch for "Q[19]" at div.vhd(51) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 51
+Info (10041): Inferred latch for "sign_bit_data" at div.vhd(51) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 51
+Info (10041): Inferred latch for "pro_b[0]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_b[1]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_b[2]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_b[3]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_b[4]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_b[5]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_b[6]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_b[7]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_b[8]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_b[9]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_a[0]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_a[1]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_a[2]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_a[3]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_a[4]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_a[5]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_a[6]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_a[7]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_a[8]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (10041): Inferred latch for "pro_a[9]" at div.vhd(31) File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (12129): Elaborating entity "result_to_BCD" using architecture "A:behavioral" for hierarchy "result_to_BCD:convert_binary" File: C:/Users/paova/Downloads/digi lab/calculator/top_level.vhd Line: 128
+Warning (10492): VHDL Process Statement warning at result_to_BCD.vhd(111): signal "int_data_1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 111
+Warning (10492): VHDL Process Statement warning at result_to_BCD.vhd(112): signal "int_data_2" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 112
+Warning (10492): VHDL Process Statement warning at result_to_BCD.vhd(113): signal "int_data_3" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 113
+Warning (10492): VHDL Process Statement warning at result_to_BCD.vhd(114): signal "int_data_4" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 114
+Warning (10492): VHDL Process Statement warning at result_to_BCD.vhd(115): signal "int_data_5" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 115
+Warning (10492): VHDL Process Statement warning at result_to_BCD.vhd(116): signal "int_data_6" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 116
+Info (12129): Elaborating entity "BCD_to_7_segmen" using architecture "A:data_process" for hierarchy "BCD_to_7_segmen:seven_seg_display_1" File: C:/Users/paova/Downloads/digi lab/calculator/top_level.vhd Line: 146
+Warning (14026): LATCH primitive "Multiplication:multi|A_ex[9]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|A_ex[8]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|A_ex[7]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|A_ex[6]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|A_ex[5]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|A_ex[4]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|A_ex[3]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|A_ex[2]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|A_ex[1]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|A_ex[0]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|B_ex[9]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|B_ex[8]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|B_ex[7]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|B_ex[6]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|B_ex[5]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|B_ex[4]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|B_ex[3]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|B_ex[2]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|B_ex[1]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Warning (14026): LATCH primitive "Multiplication:multi|B_ex[0]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 28
+Info (278001): Inferred 13 megafunctions from design logic
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "result_to_BCD:convert_binary|Div3" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 89
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "result_to_BCD:convert_binary|Div0" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 53
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "result_to_BCD:convert_binary|Div1" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 53
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "result_to_BCD:convert_binary|Mod2" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 98
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "result_to_BCD:convert_binary|Mod0" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 61
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "result_to_BCD:convert_binary|Div4" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 99
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "result_to_BCD:convert_binary|Mod3" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 99
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "result_to_BCD:convert_binary|Div2" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 62
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "result_to_BCD:convert_binary|Mod1" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 62
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "result_to_BCD:convert_binary|Mod4" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 100
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "result_to_BCD:convert_binary|Div5" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 101
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "result_to_BCD:convert_binary|Mod5" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 101
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "result_to_BCD:convert_binary|Mod6" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 102
+Info (12130): Elaborated megafunction instantiation "result_to_BCD:convert_binary|lpm_divide:Div3" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 89
+Info (12133): Instantiated megafunction "result_to_BCD:convert_binary|lpm_divide:Div3" with the following parameter: File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 89
+    Info (12134): Parameter "LPM_WIDTHN" = "20"
+    Info (12134): Parameter "LPM_WIDTHD" = "14"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_4vl.tdf
+    Info (12023): Found entity 1: lpm_divide_4vl File: C:/Users/paova/Downloads/digi lab/calculator/db/lpm_divide_4vl.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_6nh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_6nh File: C:/Users/paova/Downloads/digi lab/calculator/db/sign_div_unsign_6nh.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_mke.tdf
+    Info (12023): Found entity 1: alt_u_div_mke File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_mke.tdf Line: 27
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_t3c.tdf
+    Info (12023): Found entity 1: add_sub_t3c File: C:/Users/paova/Downloads/digi lab/calculator/db/add_sub_t3c.tdf Line: 23
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_u3c.tdf
+    Info (12023): Found entity 1: add_sub_u3c File: C:/Users/paova/Downloads/digi lab/calculator/db/add_sub_u3c.tdf Line: 23
+Info (12130): Elaborated megafunction instantiation "result_to_BCD:convert_binary|lpm_divide:Div0" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 53
+Info (12133): Instantiated megafunction "result_to_BCD:convert_binary|lpm_divide:Div0" with the following parameter: File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 53
+    Info (12134): Parameter "LPM_WIDTHN" = "20"
+    Info (12134): Parameter "LPM_WIDTHD" = "7"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_mtl.tdf
+    Info (12023): Found entity 1: lpm_divide_mtl File: C:/Users/paova/Downloads/digi lab/calculator/db/lpm_divide_mtl.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_olh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_olh File: C:/Users/paova/Downloads/digi lab/calculator/db/sign_div_unsign_olh.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_qhe.tdf
+    Info (12023): Found entity 1: alt_u_div_qhe File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_qhe.tdf Line: 27
+Info (12130): Elaborated megafunction instantiation "result_to_BCD:convert_binary|lpm_divide:Div1" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 53
+Info (12133): Instantiated megafunction "result_to_BCD:convert_binary|lpm_divide:Div1" with the following parameter: File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 53
+    Info (12134): Parameter "LPM_WIDTHN" = "20"
+    Info (12134): Parameter "LPM_WIDTHD" = "7"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12130): Elaborated megafunction instantiation "result_to_BCD:convert_binary|lpm_divide:Mod2" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 98
+Info (12133): Instantiated megafunction "result_to_BCD:convert_binary|lpm_divide:Mod2" with the following parameter: File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 98
+    Info (12134): Parameter "LPM_WIDTHN" = "20"
+    Info (12134): Parameter "LPM_WIDTHD" = "20"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_4nl.tdf
+    Info (12023): Found entity 1: lpm_divide_4nl File: C:/Users/paova/Downloads/digi lab/calculator/db/lpm_divide_4nl.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_3nh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_3nh File: C:/Users/paova/Downloads/digi lab/calculator/db/sign_div_unsign_3nh.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_gke.tdf
+    Info (12023): Found entity 1: alt_u_div_gke File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 27
+Info (12130): Elaborated megafunction instantiation "result_to_BCD:convert_binary|lpm_divide:Div4" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 99
+Info (12133): Instantiated megafunction "result_to_BCD:convert_binary|lpm_divide:Div4" with the following parameter: File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 99
+    Info (12134): Parameter "LPM_WIDTHN" = "20"
+    Info (12134): Parameter "LPM_WIDTHD" = "4"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_jtl.tdf
+    Info (12023): Found entity 1: lpm_divide_jtl File: C:/Users/paova/Downloads/digi lab/calculator/db/lpm_divide_jtl.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_llh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_llh File: C:/Users/paova/Downloads/digi lab/calculator/db/sign_div_unsign_llh.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_khe.tdf
+    Info (12023): Found entity 1: alt_u_div_khe File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_khe.tdf Line: 27
+Info (12130): Elaborated megafunction instantiation "result_to_BCD:convert_binary|lpm_divide:Div5" File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 101
+Info (12133): Instantiated megafunction "result_to_BCD:convert_binary|lpm_divide:Div5" with the following parameter: File: C:/Users/paova/Downloads/digi lab/calculator/result_to_BCD.vhd Line: 101
+    Info (12134): Parameter "LPM_WIDTHN" = "20"
+    Info (12134): Parameter "LPM_WIDTHD" = "10"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_0vl.tdf
+    Info (12023): Found entity 1: lpm_divide_0vl File: C:/Users/paova/Downloads/digi lab/calculator/db/lpm_divide_0vl.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_2nh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_2nh File: C:/Users/paova/Downloads/digi lab/calculator/db/sign_div_unsign_2nh.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_eke.tdf
+    Info (12023): Found entity 1: alt_u_div_eke File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_eke.tdf Line: 27
+Warning (13012): Latch division:div|pro_a[1] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|a[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_a[2] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|a[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_a[3] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|a[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_b[9] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|b[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_b[8] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|b[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_b[7] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|b[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_b[6] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|b[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_b[5] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|b[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_b[4] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|b[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_b[3] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|b[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_b[2] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|b[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_b[1] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|b[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_a[9] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|a[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_a[8] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|a[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_a[7] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|a[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_a[6] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|a[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_a[5] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|a[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Warning (13012): Latch division:div|pro_a[4] has unsafe behavior File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal main:main|a[9] File: C:/Users/paova/Downloads/digi lab/calculator/main.vhd Line: 41
+Info (13000): Registers with preset signals will power-up high File: C:/Users/paova/Downloads/digi lab/calculator/muti.vhd Line: 11
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Warning (14026): LATCH primitive "division:div|pro_a[0]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_a[1]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_a[2]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_a[3]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_b[9]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_b[8]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_b[7]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_b[6]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_b[5]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_b[4]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_b[3]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_b[2]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_b[1]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_b[0]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_a[9]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_a[8]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_a[7]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_a[6]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_a[5]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Warning (14026): LATCH primitive "division:div|pro_a[4]" is permanently enabled File: C:/Users/paova/Downloads/digi lab/calculator/div.vhd Line: 31
+Info (286030): Timing-Driven Synthesis is running
+Info (17016): Found the following redundant logic cells in design
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod3|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_19_result_int[0]~0" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 82
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod1|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_18_result_int[0]~0" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 77
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod4|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_19_result_int[0]~0" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 82
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod4|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|op_18~18"
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod4|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_10_result_int[0]~22" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 37
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod4|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_11_result_int[0]~24" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 42
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod4|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_12_result_int[0]~26" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 47
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod4|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_13_result_int[0]~28" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 52
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod4|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_14_result_int[0]~30" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 57
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod4|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_15_result_int[0]~32" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 62
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod4|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_16_result_int[0]~34" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 67
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod4|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_17_result_int[0]~36" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 72
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod4|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_18_result_int[0]~38" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 77
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod5|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_19_result_int[0]~0" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 82
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod5|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|op_3~18"
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod5|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|op_4~22"
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod5|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_14_result_int[0]~30" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 57
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod5|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_15_result_int[0]~32" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 62
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod5|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_16_result_int[0]~34" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 67
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod5|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_17_result_int[0]~36" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 72
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod5|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_18_result_int[0]~38" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 77
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod6|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_19_result_int[0]~0" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 82
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod6|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_16_result_int[0]~34" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 67
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod6|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_17_result_int[0]~36" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 72
+    Info (17048): Logic cell "result_to_BCD:convert_binary|lpm_divide:Mod6|lpm_divide_4nl:auto_generated|sign_div_unsign_3nh:divider|alt_u_div_gke:divider|add_sub_18_result_int[0]~38" File: C:/Users/paova/Downloads/digi lab/calculator/db/alt_u_div_gke.tdf Line: 77
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 5399 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 13 input pins
+    Info (21059): Implemented 43 output pins
+    Info (21061): Implemented 5343 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 94 warnings
+    Info: Peak virtual memory: 4911 megabytes
+    Info: Processing ended: Sun Oct 13 16:31:27 2024
+    Info: Elapsed time: 00:00:13
+    Info: Total CPU time (on all processors): 00:00:13
+
+

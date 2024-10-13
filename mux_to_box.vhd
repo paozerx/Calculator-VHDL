@@ -7,7 +7,7 @@ entity mux_to_box is
     Port ( input_1 : in STD_LOGIC_VECTOR(19 downto 0);
 			  input_2 : in STD_LOGIC_VECTOR(19 downto 0);
 			  enable : in std_logic;
-			  done : out std_logic;
+			  done : out std_logic := '0';
            output : out STD_LOGIC_VECTOR(19 downto 0));
 end mux_to_box;
 
@@ -17,6 +17,7 @@ begin
 	begin
 		case enable is
 			when '0' => 
+				done <= '0';
 				output <= input_1 ;
 			when '1' => 
 				output <= input_2;

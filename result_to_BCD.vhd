@@ -6,6 +6,7 @@ use ieee.std_logic_unsigned.all;
 entity result_to_BCD is
     Port ( clk_i      : in  std_logic;
            enable_in  : in  std_logic;
+			  enable_cal : in std_logic;
 			  enable_mux : in std_logic;
 			  sign  : in  std_logic;
 			  sign_input  : in  std_logic;
@@ -41,7 +42,7 @@ begin
                 int_data_5 <= 10;
                 int_data_6 <= 10;
 					 
-            elsif data = "00000000000000000000" and enable_in = '0' then
+            elsif data = "11000000000000000000" and enable_in = '0' then
                 int_data_1 <= 12;
                 int_data_2 <= 12;
                 int_data_3 <= 12;
@@ -93,6 +94,25 @@ begin
                 int_data_4 <= 15;
                 int_data_5 <= 15;
                 int_data_6 <= 15;
+					 
+				elsif enable_cal = '1'then
+					if data(1 downto 0) = "00" then
+						 int_data_1 <= 0;
+						 int_data_2 <= 0;
+					elsif data(1 downto 0) = "01" then
+						 int_data_1 <= 1;
+						 int_data_2 <= 0;
+					elsif data(1 downto 0) = "10" then
+						 int_data_1 <= 0;
+						 int_data_2 <= 1;
+					elsif data(1 downto 0) = "11" then
+						 int_data_1 <= 1;
+						 int_data_2 <= 1;
+					end if;
+				  int_data_3 <= 12;
+				  int_data_4 <= 12;
+				  int_data_5 <= 12;
+				  int_data_6 <= 12;
 					 
             else
                 int_data_1 <= conv_integer(unsigned(data)) mod 10;

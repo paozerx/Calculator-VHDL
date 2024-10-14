@@ -10,6 +10,7 @@ entity main is
 			  start,reset,clock : in std_logic;
 			  enable : out std_logic;
 			  enable_binary : out std_logic;
+			  enable_cal : out std_logic;
 			  selector : out STD_LOGIC_VECTOR(1 downto 0);
 			  a : out STD_LOGIC_VECTOR(9 downto 0);
            b : out STD_LOGIC_VECTOR(9 downto 0));
@@ -45,6 +46,7 @@ begin
 		   input_to <= (others => '0');
 			enable_binary <= '0';
 			enable <= '0';
+			enable_cal <= '0';
 			selector <= (others => '0');
 			d_start <= '0';
 			
@@ -61,6 +63,7 @@ begin
 						input_to <= "10000000000000000000";
 						enable_binary <= '0';
 						enable <= '0';
+						enable_cal <= '0';
 						
 					end if;
 						
@@ -73,6 +76,7 @@ begin
 						input_to (9 downto 0) <= input_ex;
 						enable_binary <= '1';
 						enable <= '0';
+						enable_cal <= '0';
 					end if;
 						
 				when S2 =>
@@ -80,9 +84,10 @@ begin
 						state <= S3;
 					elsif start = '1' then
 						state <= S2;
-						input_to <= "00000000000000000000";
+						input_to <= "11000000000000000000";
 						enable_binary <= '0';
 						enable <= '0';
+						enable_cal <= '0';
 					end if;
 						
 				when S3 =>
@@ -94,6 +99,7 @@ begin
 						input_to (9 downto 0) <= input_ex;
 						enable_binary <= '1';
 						enable <= '0';
+						enable_cal <= '0';
 					end if;
 						
 				when S4 =>
@@ -101,9 +107,10 @@ begin
 						state <= S5;
 					elsif start = '1' then
 						state <= S4;
-						input_to <= "00000000000000000000";
+						input_to <= "11000000000000000000";
 						enable_binary <= '0';
 						enable <= '0';
+						enable_cal <= '0';
 					end if;
 						
 				when S5 =>
@@ -113,9 +120,10 @@ begin
 						
 					elsif start = '1' then
 						state <= S5;
-						input_to <= "00000000000000000000";
+						input_to <= "000000000000000000" & input(1 downto 0);
 						enable_binary <= '0';
 						enable <= '0';
+						enable_cal <= '1';
 					end if;
 						
 				when S6 =>

@@ -31,6 +31,7 @@ architecture converter of top_level is
  signal Transfer_data_binary : STD_LOGIC_VECTOR (19 downto 0);
  signal enable_mux : std_logic;
  signal enable_num : std_logic;
+ signal enable_cal : std_logic;
  signal mux_to_mux : STD_LOGIC_VECTOR (19 downto 0);
  signal result_muti : STD_LOGIC_VECTOR (19 downto 0);
  signal result_add : STD_LOGIC_VECTOR (19 downto 0);
@@ -57,6 +58,7 @@ architecture converter of top_level is
 										enable => enable_mux,
 										enable_binary => enable_num,
 										selector => selec,
+										enable_cal => enable_cal,
 										sign_input => sign_input,
 										a => A,
 										b => B,
@@ -135,6 +137,7 @@ architecture converter of top_level is
 										selec_in => selec,
 										R => result_div_R,
 										sign => sign_out, 
+										enable_cal => enable_cal,
 										overflow_add => overflow_add,
 										overflow_sub => overflow_sub,
 										BCD_digit_1 => BCD_data_digit_1,

@@ -4,8 +4,8 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity mux_sign is
-    Port ( add : in STD_LOGIC_VECTOR(19 downto 0);
-           sub : in STD_LOGIC_VECTOR(19 downto 0);
+    Port ( add : in STD_LOGIC_VECTOR(9 downto 0);
+           sub : in STD_LOGIC_VECTOR(9 downto 0);
            sign_muti : in std_logic;
            sign_div : in std_logic;
            enable  : in STD_LOGIC_VECTOR(1 downto 0);

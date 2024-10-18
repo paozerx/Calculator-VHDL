@@ -34,8 +34,8 @@ architecture converter of top_level is
  signal enable_cal : std_logic;
  signal mux_to_mux : STD_LOGIC_VECTOR (19 downto 0);
  signal result_muti : STD_LOGIC_VECTOR (19 downto 0);
- signal result_add : STD_LOGIC_VECTOR (19 downto 0);
- signal result_sub : STD_LOGIC_VECTOR (19 downto 0);
+ signal result_add : STD_LOGIC_VECTOR (9 downto 0);
+ signal result_sub : STD_LOGIC_VECTOR (9 downto 0);
  signal result_div : STD_LOGIC_VECTOR (19 downto 0);
  signal result_div_R : STD_LOGIC_VECTOR (19 downto 0);
  signal sign_out_div : STD_LOGIC;

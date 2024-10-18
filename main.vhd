@@ -72,6 +72,7 @@ begin
 						
 				when S1 =>
 					input_to <= (others => '0');
+					
 					if start = '0' and d_start = '1' then
 						a <= input_et;
 						state <= S2;

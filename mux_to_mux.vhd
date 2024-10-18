@@ -18,9 +18,17 @@ begin
     begin
         case enable is
             when "11" => 
-					output <= input_1;
+					if input_1(9) = '1' then
+							output(9 downto 0) <= not(input_1(9 downto 0)) + 1;
+						else 
+							output(9 downto 0) <= input_1(9 downto 0);
+						end if;
             when "10" => 
-					output <= input_2;
+						if input_2(9) = '1' then
+							output(9 downto 0) <= not(input_2(9 downto 0)) + 1;
+						else 
+							output(9 downto 0) <= input_2(9 downto 0);
+						end if;
             when "01" => 
 					output <= input_3;
             when "00" => 

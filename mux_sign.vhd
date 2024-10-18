@@ -22,13 +22,13 @@ begin
 		  sign_sub <= sub(9);
         case enable is
             when "00" => 
-					output <= sign_add;
-            when "01" => 
-					output <= sign_sub;
-            when "10" => 
-					output <= sign_muti;
-            when "11" => 
 					output <= sign_div;
+            when "01" => 
+					output <= sign_muti;
+            when "10" => 
+					output <= sign_sub;
+            when "11" => 
+					output <= sign_add;
             when others => output <= '0'; 
         end case;
     end process;

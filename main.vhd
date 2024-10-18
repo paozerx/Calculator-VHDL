@@ -68,8 +68,13 @@ begin
 					end if;
 						
 				when S1 =>
+					input_to <= (others => '0');
 					if start = '0' and d_start = '1' then
-						a <= input_ex;
+						if input(9) = '1' then
+							a <= not(input_ex) + 1;
+						else 
+							a <= input_ex;
+						end if;
 						state <= S2;
 					elsif start = '1' then
 						state <= S1;
@@ -81,6 +86,7 @@ begin
 						
 				when S2 =>
 					if start = '0' and d_start = '1' then
+						input_to <= (others => '0');
 						state <= S3;
 					elsif start = '1' then
 						state <= S2;
@@ -92,7 +98,11 @@ begin
 						
 				when S3 =>
 					if start = '0' and d_start = '1' then
-						b <= input_ex;
+						if input(9) = '1' then
+							b <= not(input_ex) + 1;
+						else 
+							b <= input_ex;
+						end if;
 						state <= S4;
 					elsif start = '1' then
 						state <= S3;
@@ -130,6 +140,8 @@ begin
 						state <= S6;
 						enable_binary <= '1';
 						enable <= '1';
+						enable_cal <= '0';
+						input_to <= (others => '0');
 			end case;
 						
 				

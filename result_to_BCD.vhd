@@ -8,6 +8,7 @@ entity result_to_BCD is
            enable_in  : in  std_logic;
 			  enable_cal : in std_logic;
 			  enable_mux : in std_logic;
+			  detect_zero : in std_logic;
 			  sign  : in  std_logic;
 			  sign_input  : in  std_logic;
 			  selec_in  : in  STD_LOGIC_VECTOR (1 downto 0);
@@ -50,8 +51,8 @@ begin
                 int_data_5 <= 12;
                 int_data_6 <= 12;
 					 
-				elsif selec_in = "00" and enable_mux = '1' and enable_in = '1' then
-					if conv_integer(unsigned(R)) / 100 >= 10 or conv_integer(unsigned(data)) / 100 >= 10 then
+				elsif selec_in = "00" and enable_mux = '1' and enable_in = '1'  then
+					if conv_integer(unsigned(R)) / 10 >= 10 or conv_integer(unsigned(data)) / 10 >= 10 then
 						 int_data_1 <= 15;
 						 int_data_2 <= 15;
 						 int_data_3 <= 15;
@@ -114,13 +115,25 @@ begin
 				  int_data_5 <= 12;
 				  int_data_6 <= 12;
 					 
-            else
+            elsif enable_mux = '0' and enable_in = '1' then
                 int_data_1 <= conv_integer(unsigned(data)) mod 10;
                 int_data_2 <= (conv_integer(unsigned(data)) / 10) mod 10;
                 int_data_3 <= (conv_integer(unsigned(data)) / 100) mod 10;
                 int_data_4 <= (conv_integer(unsigned(data)) / 1000) mod 10;
                 int_data_5 <= (conv_integer(unsigned(data)) / 10000) mod 10;
-                if sign = '1' or sign_input = '1' then
+                if enable_mux = '0' and sign_input = '1' then
+						int_data_6 <= 14;
+					 else 
+						int_data_6 <= 12;
+					end if;
+					
+				elsif enable_mux = '1' and enable_in = '1' then
+                int_data_1 <= conv_integer(unsigned(data)) mod 10;
+                int_data_2 <= (conv_integer(unsigned(data)) / 10) mod 10;
+                int_data_3 <= (conv_integer(unsigned(data)) / 100) mod 10;
+                int_data_4 <= (conv_integer(unsigned(data)) / 1000) mod 10;
+                int_data_5 <= (conv_integer(unsigned(data)) / 10000) mod 10;
+                if enable_mux = '1' and sign = '1' then
 						int_data_6 <= 14;
 					 else 
 						int_data_6 <= 12;

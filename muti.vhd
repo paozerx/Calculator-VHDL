@@ -49,16 +49,20 @@ begin
 
     process (RST_N, CLK,A,B)
     begin
-			if A(N-1) = '1' and  B(N-1) = '1'then
-				sign_iex <= '1';
-				
-			elsif A(N-1) = '0' and  B(N-1) = '1' then
+			if A(N-1) = '1' and  B(N-1) = '1' and A /= "0000000000" and B /=  "0000000000" then
 				sign_iex <= '0';
 				
-			elsif A(N-1) = '1' and  B(N-1) = '0' then
-				sign_iex <= '0';
-			elsif A(N-1) = '0' and  B(N-1) = '0' then
+			elsif A(N-1) = '0' and  B(N-1) = '1' and A /=  "0000000000" and B /=  "0000000000" then
 				sign_iex <= '1';
+				
+			elsif A(N-1) = '1' and  B(N-1) = '0' and A /=  "0000000000" and B /=  "0000000000" then
+				sign_iex <= '1';
+				
+			elsif A(N-1) = '0' and  B(N-1) = '0' and A /=  "0000000000" and B /=  "0000000000" then
+				sign_iex <= '0';
+				
+			elsif A = "0000000000" or B = "0000000000" then
+				sign_iex <= '0';
 			end if;
 			
         if RST_N = '0' then  -- Asynchronous reset (active-low)

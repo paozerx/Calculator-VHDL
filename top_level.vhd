@@ -45,6 +45,7 @@ architecture converter of top_level is
  signal done_o : std_logic;
  signal overflow_add : std_logic;
  signal overflow_sub : std_logic;
+ signal detect_zero : std_logic ;
  
 
  
@@ -119,12 +120,12 @@ architecture converter of top_level is
 		div: 			entity work.division(Behave)
 									port map(
 										A => A,
-									   B => B,
-										--START => START_in,
+									   B => B,						
 										RST_N => reset,
 										CLK => clock,
 										sign_bit => sign_out_div,
 										Q => result_div,
+										detect_zero => detect_zero,
 										R => result_div_R);
 										
 		convert_binary:		entity work.result_to_BCD(Behavioral)
@@ -138,6 +139,7 @@ architecture converter of top_level is
 										R => result_div_R,
 										sign => sign_out, 
 										enable_cal => enable_cal,
+										detect_zero => detect_zero,
 										overflow_add => overflow_add,
 										overflow_sub => overflow_sub,
 										BCD_digit_1 => BCD_data_digit_1,
@@ -180,4 +182,3 @@ architecture converter of top_level is
 
 
 end converter;
-

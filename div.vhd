@@ -9,6 +9,7 @@ entity division is
           A, B : in std_logic_vector( N-1 downto 0 ):= (others => '0');
           R : out std_logic_vector( 2*N-1 downto 0 ):= (others => '0'); 
 			 Q : out std_logic_vector( 2*N-1 downto 0 ):= (others => '0');
+			 detect_zero : out std_logic ;
 			 sign_bit : out std_logic  
 			 );
 end division ;
@@ -50,14 +51,18 @@ begin
     
     process (CLK,RST_N,A,B)
     begin
-			if A(9) ='1' and B(9) ='1' then 
+			if A(9) ='1' and B(9) ='1' and A /= "0000000000" and B /=  "0000000000" then 
 				sign_bit_data <= '0';
-			elsif A(9) ='0' and B(9) ='0' then 
+			elsif A(9) ='0' and B(9) ='0' and A /= "0000000000" and B /=  "0000000000" then 
 				sign_bit_data <= '0';
-			elsif A(9) ='1' and B(9) ='0' then 
+			elsif A(9) ='1' and B(9) ='0' and A /= "0000000000" and B /=  "0000000000" then 
 				sign_bit_data <= '1';
-			elsif A(9) ='0' and B(9) ='1' then 
+			elsif A(9) ='0' and B(9) ='1' and A /= "0000000000" and B /=  "0000000000" then 
 				sign_bit_data <= '1';
+			elsif A = "0000000000" and B /=  "0000000000"  then
+				sign_bit_data <= '0';
+			elsif B ="0000000000"  then
+				 detect_zero <= '1';
 			end if;
 			
 		  

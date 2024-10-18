@@ -22,6 +22,7 @@ signal selec : STD_LOGIC_VECTOR(1 downto 0);
 signal state : state_type := S0;
 signal start_in : std_logic:= '0';
 signal input_ex : STD_LOGIC_VECTOR(9 downto 0) := (others => '0');
+signal input_et : STD_LOGIC_VECTOR(9 downto 0) := (others => '0');
 signal d_start : std_logic := '0';
 
 
@@ -33,9 +34,11 @@ begin
 		
 		if (input(9) = '1') then
 			input_ex <= not(input) + 1;
+			input_et <= input;
 			sign_input <= '1';
 		else
 			input_ex <= input;
+			input_et <= input;
 			sign_input <= '0';
 		end if;
 		
@@ -54,8 +57,8 @@ begin
 			d_start <= start;
 			case state is
 				when S0 =>
+					input_to <= (others => '0');
 					if start = '0' and d_start = '1' then
-						input_to <= (others => '0');
 						state <= S1;
 						
 					elsif start = '1' then
@@ -70,11 +73,7 @@ begin
 				when S1 =>
 					input_to <= (others => '0');
 					if start = '0' and d_start = '1' then
-						if input(9) = '1' then
-							a <= not(input_ex) + 1;
-						else 
-							a <= input_ex;
-						end if;
+						a <= input_et;
 						state <= S2;
 					elsif start = '1' then
 						state <= S1;
@@ -86,7 +85,6 @@ begin
 						
 				when S2 =>
 					if start = '0' and d_start = '1' then
-						input_to <= (others => '0');
 						state <= S3;
 					elsif start = '1' then
 						state <= S2;
@@ -97,12 +95,9 @@ begin
 					end if;
 						
 				when S3 =>
+					input_to <= (others => '0');
 					if start = '0' and d_start = '1' then
-						if input(9) = '1' then
-							b <= not(input_ex) + 1;
-						else 
-							b <= input_ex;
-						end if;
+						b <= input_et;
 						state <= S4;
 					elsif start = '1' then
 						state <= S3;
@@ -141,7 +136,7 @@ begin
 						enable_binary <= '1';
 						enable <= '1';
 						enable_cal <= '0';
-						input_to <= (others => '0');
+						--input_to <= (others => '0');
 			end case;
 						
 				

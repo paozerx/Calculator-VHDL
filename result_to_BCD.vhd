@@ -71,32 +71,72 @@ begin
 							int_data_6 <= 12;
 						 end if;
 					end if;
-					 
-				elsif selec_in = "11" and enable_mux = '1' and overflow_add = '1' and enable_in = '1' then
-					 int_data_1 <= 15;
-					 int_data_2 <= 15;
-					 int_data_3 <= 15;
-					 int_data_4 <= 15;
-					 int_data_5 <= 15;
-					 int_data_6 <= 15;
-						 
-				elsif selec_in = "10" and enable_mux = '1' and overflow_sub = '1' and enable_in = '1' then
-					 int_data_1 <= 15;
-					 int_data_2 <= 15;
-					 int_data_3 <= 15;
-					 int_data_4 <= 15;
-					 int_data_5 <= 15;
-					 int_data_6 <= 15;
 					
-            elsif (conv_integer(unsigned(data)) / 10000) >= 10 and enable_mux = '1' and selec_in = "01" and enable_in = '1' then
-                int_data_1 <= 15;
-                int_data_2 <= 15;
-                int_data_3 <= 15;
-                int_data_4 <= 15;
-                int_data_5 <= 15;
-                int_data_6 <= 15;
+				elsif selec_in = "01" and enable_mux = '1' and enable_in = '1'  then
+					if (conv_integer(unsigned(data)) / 10000) >= 10 and enable_mux = '1' and selec_in = "01" and enable_in = '1' then
+						 int_data_1 <= 15;
+						 int_data_2 <= 15;
+						 int_data_3 <= 15;
+						 int_data_4 <= 15;
+						 int_data_5 <= 15;
+						 int_data_6 <= 15;
+					else
+						 int_data_1 <= conv_integer(unsigned(data)) mod 10;
+						 int_data_2 <= (conv_integer(unsigned(data)) / 10) mod 10;
+						 int_data_3 <= (conv_integer(unsigned(data)) / 100) mod 10;
+						 int_data_4 <= (conv_integer(unsigned(data)) / 1000) mod 10;
+						 int_data_5 <= (conv_integer(unsigned(data)) / 10000) mod 10;
+						 if enable_mux = '1' and sign = '1' then
+							int_data_6 <= 14;
+						 else 
+							int_data_6 <= 12;
+						end if;
+					end if;
+					
+				elsif selec_in = "10" and enable_mux = '1' and enable_in = '1'  then
+					if selec_in = "10" and enable_mux = '1' and overflow_sub = '1' and enable_in = '1' then
+						 int_data_1 <= 15;
+						 int_data_2 <= 15;
+						 int_data_3 <= 15;
+						 int_data_4 <= 15;
+						 int_data_5 <= 15;
+						 int_data_6 <= 15;
+					else
+						 int_data_1 <= conv_integer(unsigned(data)) mod 10;
+						 int_data_2 <= (conv_integer(unsigned(data)) / 10) mod 10;
+						 int_data_3 <= (conv_integer(unsigned(data)) / 100) mod 10;
+						 int_data_4 <= (conv_integer(unsigned(data)) / 1000) mod 10;
+						 int_data_5 <= (conv_integer(unsigned(data)) / 10000) mod 10;
+						 if enable_mux = '1' and sign = '1' then
+							int_data_6 <= 14;
+						 else 
+							int_data_6 <= 12;
+						end if;
+					end if;
+				
+				elsif selec_in = "11" and enable_mux = '1' and enable_in = '1'  then
+					if selec_in = "11" and enable_mux = '1' and overflow_add = '1' and enable_in = '1' then
+						 int_data_1 <= 15;
+						 int_data_2 <= 15;
+						 int_data_3 <= 15;
+						 int_data_4 <= 15;
+						 int_data_5 <= 15;
+						 int_data_6 <= 15;
+					else
+						 int_data_1 <= conv_integer(unsigned(data)) mod 10;
+						 int_data_2 <= (conv_integer(unsigned(data)) / 10) mod 10;
+						 int_data_3 <= (conv_integer(unsigned(data)) / 100) mod 10;
+						 int_data_4 <= (conv_integer(unsigned(data)) / 1000) mod 10;
+						 int_data_5 <= (conv_integer(unsigned(data)) / 10000) mod 10;
+						 if enable_mux = '1' and sign = '1' then
+							int_data_6 <= 14;
+						 else 
+							int_data_6 <= 12;
+						end if;
+					end if;
 					 
-				elsif enable_cal = '1'then
+					 
+				elsif enable_cal = '1' and enable_mux = '0' and enable_in = '0' then
 					if data(1 downto 0) = "00" then
 						 int_data_1 <= 0;
 						 int_data_2 <= 0;
@@ -115,7 +155,7 @@ begin
 				  int_data_5 <= 12;
 				  int_data_6 <= 12;
 					 
-            elsif enable_mux = '0' and enable_in = '1' then
+            elsif enable_mux = '0' and enable_in = '1' and enable_cal = '0' then
                 int_data_1 <= conv_integer(unsigned(data)) mod 10;
                 int_data_2 <= (conv_integer(unsigned(data)) / 10) mod 10;
                 int_data_3 <= (conv_integer(unsigned(data)) / 100) mod 10;
@@ -127,17 +167,6 @@ begin
 						int_data_6 <= 12;
 					end if;
 					
-				elsif enable_mux = '1' and enable_in = '1' then
-                int_data_1 <= conv_integer(unsigned(data)) mod 10;
-                int_data_2 <= (conv_integer(unsigned(data)) / 10) mod 10;
-                int_data_3 <= (conv_integer(unsigned(data)) / 100) mod 10;
-                int_data_4 <= (conv_integer(unsigned(data)) / 1000) mod 10;
-                int_data_5 <= (conv_integer(unsigned(data)) / 10000) mod 10;
-                if enable_mux = '1' and sign = '1' then
-						int_data_6 <= 14;
-					 else 
-						int_data_6 <= 12;
-					end if;
             end if;
         end if;
 

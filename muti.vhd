@@ -65,44 +65,41 @@ begin
 				sign_iex <= '0';
 			end if;
 			
-        if RST_N = '0' then  -- Asynchronous reset (active-low)
+			if RST_N = '0' then  
             state <= S0;
             Data_A <= (others => '0');
             Data_B <= (others => '0');
             Data_Product <= (others => '0');
             R <= (others => '0');
-				sign_iex <= '1';
-			
-			sign <= '1';
+            sign_iex <= '1';
+            sign <= '0';
+				
         elsif rising_edge(CLK) then
             case state is
                 when S0 =>
-                    if S_Start = '0' then  -- Check Start for multiply process
-                        Data_A(N-1 downto 0) <= A_ex;  -- Keep data A
-                        Data_B <= B_ex;  -- Keep data B
-                        state <= S1;  -- Active START, go to S1
+                    if S_Start = '0' then  
+                        Data_A(N-1 downto 0) <= A_ex;  
+                        Data_B <= B_ex;  
+                        state <= S1;  
                     else
-                        state <= S0;  -- Non-active START, remain in S0
+                        state <= S0;  
                     end if;
-                when S1 =>  -- Multiplication process
-                    if bit_counter < (N+1) then
-                        state <= S1;
+
+                when S1 =>
+                    if bit_counter < N then
                         if Data_B(bit_counter) = '1' then
-                            Data_Product <= Data_Product + Data_A;
-                            Data_A <= std_logic_vector(shift_left(unsigned(Data_A), 1));  -- Shift-left Data_A by 1 bit
-                            R <= Data_Product;
-                            bit_counter <= bit_counter + 1;
-                        else
-                            Data_A <= std_logic_vector(shift_left(unsigned(Data_A), 1));  -- Shift-left Data_A by 1 bit
-                            R <= Data_Product;
-                            bit_counter <= bit_counter + 1;
+                            Data_Product <= Data_Product + Data_A;  
                         end if;
+                        Data_A <= std_logic_vector(shift_left(unsigned(Data_A), 1));  
+                        bit_counter <= bit_counter + 1;
                     else
+                        
+                        R <= Data_Product;  
                         bit_counter <= 0;
                         Data_Product <= (others => '0');
                         Data_A <= (others => '0');
                         Data_B <= (others => '0');
-                        state <= S0;
+                        state <= S0;  
                     end if;
 						  sign <= sign_iex;
             end case;

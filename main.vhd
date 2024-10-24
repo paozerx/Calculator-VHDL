@@ -8,7 +8,7 @@ entity main is
 			  input_to : out STD_LOGIC_VECTOR(19 downto 0);
 			  sign_input : out std_logic := '0';
 			  start,reset,clock : in std_logic;
-			  enable : out std_logic;
+			  enable : out std_logic; --mux 2
 			  enable_binary : out std_logic;
 			  enable_cal : out std_logic;
 			  selector : out STD_LOGIC_VECTOR(1 downto 0);
@@ -67,17 +67,17 @@ begin
 						enable_binary <= '0';
 						enable <= '0';
 						enable_cal <= '0';
-						
 					end if;
 						
 				when S1 =>
-					input_to <= (others => '0');
+					--input_to <= (others => '0');
 					
 					if start = '0' and d_start = '1' then
 						a <= input_et;
 						state <= S2;
 					elsif start = '1' then
 						state <= S1;
+						input_to <= (others => '0');
 						input_to (9 downto 0) <= input_ex;
 						enable_binary <= '1';
 						enable <= '0';
@@ -96,12 +96,13 @@ begin
 					end if;
 						
 				when S3 =>
-					input_to <= (others => '0');
+					--input_to <= (others => '0');
 					if start = '0' and d_start = '1' then
 						b <= input_et;
 						state <= S4;
 					elsif start = '1' then
 						state <= S3;
+						input_to <= (others => '0');
 						input_to (9 downto 0) <= input_ex;
 						enable_binary <= '1';
 						enable <= '0';

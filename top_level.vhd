@@ -111,7 +111,6 @@ architecture converter of top_level is
 									port map(
 										A => A,
 									   B => B,
-										--START => START_in,
 										RST_N => reset,
 										CLK => clock,
 										sign => sign_out_muti,
